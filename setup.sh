@@ -247,6 +247,9 @@ function setup_osx () {
         "/System/Library/CoreServices/Menu Extras/Battery.menu" \
         "/System/Library/CoreServices/Menu Extras/Clock.menu"
 
+    # Set the clock format
+    defaults write com.apple.menuextra.clock DateFormat -string "EE MMM d  h:mm a"
+
     # Expand save panel by default
     defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
     defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
