@@ -33,7 +33,8 @@ set clipboard=unnamed
 " Map NERDTreeToggle to act like ST
 map <C-k><C-b> :NERDTreeToggle<CR>
 
-colorscheme Tomorrow-Night-Eighties
+colorscheme base16-monokai
+set background=dark
 
 " Expand tab
 set expandtab

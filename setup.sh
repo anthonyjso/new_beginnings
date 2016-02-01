@@ -61,6 +61,11 @@ install_homebrew () {
         # This can be automated to just untar the tarball and symlink the bin
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
+    info "Updating Homebrew"
+    [ -O /usr/local ] || sudo chown ${USER}:admin /usr/local
+    brew update
+    brew upgrade
+    brew cleanup
     success "Homebrew installed"
 }
 
@@ -256,6 +261,7 @@ function setup_osx () {
     defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
     defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
     defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+    defaults write NSGlobalDomain com.apple.mouse.scaling -float 2.5
 
     # Trackpad: map bottom right corner to right-click
     defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
