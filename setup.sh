@@ -258,12 +258,16 @@ function setup_osx () {
     # Trackpad, mouse, keyboard, Bluetooth accessories, and input
 
     # Trackpad: enable tap to click for this user and for the login screen
-    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
     defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
     defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
     defaults write NSGlobalDomain com.apple.mouse.scaling -float 2.5
 
+
+    defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode -string "TwoButton"
+    defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseTwoFingerHorizSwipeGesture -int 2
+
     # Trackpad: map bottom right corner to right-click
+    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
     defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
     defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
     defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
