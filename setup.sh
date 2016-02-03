@@ -179,13 +179,14 @@ function install_casks () {
         intellij-idea-ce \
         iterm2 \
         java \
+        karabiner \
         keyboard-cleaner \
         kindle \
         mysqlworkbench \
         screenhero \
         skitch \
         spectacle \
-        sublime-text \
+        spotify \
         vagrant \
         virtualbox
 
