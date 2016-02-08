@@ -17,14 +17,13 @@ source /usr/local/bin/virtualenvwrapper.sh
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # AWS
-AWS_BIN=$(which aws)
-if [[ $AWS_BIN ]]; then
-    complete -C "$(dirname ${AWS_BIN})/aws_completer" aws
-fi
-
 function awsenv() {
     export AWS_DEFAULT_PROFILE=${1}
     export AWS_PROFILE=${1}
+    AWS_BIN=$(which aws)
+    if [[ $AWS_BIN ]]; then
+        complete -C "$(dirname ${AWS_BIN})/aws_completer" aws
+    fi
 }
 
 # bash-completion
