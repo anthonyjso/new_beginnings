@@ -1,0 +1,22 @@
+[user]
+	name = Anthony So
+	email = anthonyjso@users.noreply.github.com
+[push]
+	default = upstream
+[alias]
+	co = checkout
+	ci = commit
+	br = branch
+	st = status
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	ui = auto
+[core]
+	excludesfile = /Users/aso/.gitignore_global
+	editor = /usr/bin/vim
+[credential]
+	helper = osxkeychain
