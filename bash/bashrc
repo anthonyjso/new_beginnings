@@ -40,5 +40,5 @@ else
     printf "No bash completion located at %s" $(brew --prefix)
 fi
 
-source ~/.bashrc.work
+[ -f ~/.bashrc.work ] && source ~/.bashrc.work
 
