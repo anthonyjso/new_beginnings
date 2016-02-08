@@ -171,6 +171,7 @@ function install_casks () {
         caffeine \
         chromecast \
         cyberduck \
+        dropbox \
         firefox \
         flux \
         gas-mask \
