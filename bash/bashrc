@@ -11,7 +11,7 @@ eval "$(rbenv init -)"
 export GOPATH=/usr/local/Cellar/go/1.5.3
 
 # virtualenv
-export WORKON_HOME=~/code/venv
+export WORKON_HOME=~/Code/venv
 source /usr/local/bin/virtualenvwrapper.sh
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1

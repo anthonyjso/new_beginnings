@@ -1,0 +1,3 @@
+#!/bin/bash
+
+PS1="${RED}[\${AWS_PROFILE:="default"}|\$( basename \${VIRTUAL_ENV:="."} )]\$( __git_ps1 ) 👻  : ${END_COLOR}"

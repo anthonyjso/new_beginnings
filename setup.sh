@@ -202,6 +202,11 @@ function setup_git () {
 function setup_python () {
     mkdir -p ${CODE}/venv
     pip install virtualenv virtualenvwrapper
+    for custom_script in ${DIR}/virtualenvwrapper/*; do
+        script=$(basename ${custom_script})
+        [ -f ${CODE}/venv/${script} ] && mv ${CODE}/venv/${script}.bak
+        ln -s ${custom_script} ${CODE}/venv/${script}
+    done
 
     success "Setup Python virtual environments"
 }
