@@ -194,6 +194,11 @@ function install_casks () {
 
 }
 
+function setup_git () {
+   [ -f ~/.giconfig ] && mv ~/.gitconfig ~/.gitconfig.bak
+   ln -s ${DIR}/git/gitconfig ~/.gitconfig
+}
+
 function setup_python () {
     mkdir -p ${CODE}/venv
     pip install virtualenv virtualenvwrapper
@@ -470,6 +475,7 @@ if [ $0 != $_ ]; then
     install_homebrew
     install_kegs
     install_casks
+    setup_git
     setup_python
     fetch_themes
     install_dotfiles
