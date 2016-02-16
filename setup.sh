@@ -157,6 +157,10 @@ install_kegs () {
     # ruby and rbenv
     brew install rbenv ruby-build
 
+    # Command line json querying
+    brew tap jmespath/jmespath
+    brew install jp
+
     success "Homebrew kegs installed"
 }
 
