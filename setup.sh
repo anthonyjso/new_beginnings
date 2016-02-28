@@ -117,6 +117,9 @@ install_kegs () {
     # Lightweight and useful DB for hacks
     brew install sqlite
 
+    # OCR
+    brew install tesseract
+
     # Nicer than mdfind and fast
     brew install the_silver_searcher
 
