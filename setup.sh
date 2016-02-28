@@ -313,7 +313,7 @@ function setup_osx () {
     defaults write com.apple.screensaver askForPasswordDelay -int 0
 
     # Save screenshots to the desktop
-    mkdir -p "${HOME}/Desktop/screenshots"
+    mkdir -p "${HOME}/Pictures/screenshots"
     defaults write com.apple.screencapture location -string "${HOME}/Desktop/screenshots"
 
     # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
