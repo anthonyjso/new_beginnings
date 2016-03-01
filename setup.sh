@@ -93,6 +93,9 @@ install_kegs () {
     # no looking back at SVN
     brew install git
 
+    # gnu sed
+    brew install gnu-sed --with-default-names
+
     # Eventually I'll sit down and write something with it
     brew install go
 
