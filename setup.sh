@@ -312,6 +312,9 @@ function setup_osx () {
     # Use F keys as standard keys...requires reboot :/
     defaults write -g com.apple.keyboard.fnState -boolean true
 
+    # Turn off autocorrect
+    defaults write NSGlobalDomain  NSAutomaticSpellingCorrectionEnabled 0
+
     # Screen
 
     # Require password immediately after sleep or screen saver begins
