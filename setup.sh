@@ -93,6 +93,9 @@ install_kegs () {
     # no looking back at SVN
     brew install git
 
+    # gnu sed
+    brew install gnu-sed --with-default-names
+
     # Eventually I'll sit down and write something with it
     brew install go
 
@@ -311,6 +314,9 @@ function setup_osx () {
 
     # Use F keys as standard keys...requires reboot :/
     defaults write -g com.apple.keyboard.fnState -boolean true
+
+    # Turn off autocorrect
+    defaults write NSGlobalDomain  NSAutomaticSpellingCorrectionEnabled 0
 
     # Screen
 
