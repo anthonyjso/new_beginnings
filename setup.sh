@@ -96,6 +96,9 @@ install_kegs () {
     # Eventually I'll sit down and write something with it
     brew install go
 
+    # gpg
+    brew install gpg
+
     # Nicer top
     brew install htop-osx
 
