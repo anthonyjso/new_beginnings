@@ -106,7 +106,10 @@ install_kegs () {
     brew install htop-osx
 
     # Parse and filter JSON from the command line
-    brew install jq
+    brew install jmespath
+
+    # Maven for building Java projects
+    brew install maven
 
     # SSL
     brew install openssl
