@@ -40,5 +40,21 @@ else
     printf "No bash completion located at %s" $(brew --prefix)
 fi
 
+
+# pip bash completion start
+_pip_completion()
+{
+    COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \
+                   COMP_CWORD=$COMP_CWORD \
+                   PIP_AUTO_COMPLETE=1 $1 ) )
+}
+complete -o default -F _pip_completion pip
+# pip bash completion end
+
+# Source highlight with less
+export LESSOPEN="| src-hilite-lesspipe.sh %s"
+export LESS=' -R '
+
+
 [ -f ~/.bashrc.work ] && source ~/.bashrc.work
 

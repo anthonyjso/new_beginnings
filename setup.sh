@@ -120,6 +120,9 @@ install_kegs () {
     # Bread and butter
     brew install python
 
+    # Highlight source with less
+    brew install source-highlight
+
     # Lightweight and useful DB for hacks
     brew install sqlite
 
