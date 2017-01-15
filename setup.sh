@@ -211,6 +211,11 @@ function install_casks () {
         vagrant \
         virtualbox
 
+    ln -s ${HOME}/Applications/Docker.app/Contents/Resources/etc/docker.bash-completion /usr/local/etc/bash_completion.d/docker
+    ln -s ${HOME}/Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion /usr/local/etc/bash_completion.d/docker-machine
+    ln -s ${HOME}/Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion /usr/local/etc/bash_completion.d/docker-compose
+
+
     success "Casks installed"
 
 }
