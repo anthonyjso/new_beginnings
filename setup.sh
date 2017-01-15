@@ -180,10 +180,11 @@ function install_casks () {
     # Manually: little-snitch, alfred, pycharm pro
 
 
-    brew cask install --appdir="/Applications" \
+    brew cask install --appdir="${HOME}/Applications" \
         caffeine \
         chromecast \
         cyberduck \
+        docker \
         dropbox \
         firefox \
         flux \
@@ -472,6 +473,7 @@ function setup_vim () {
                 git@github.com:tpope/vim-sensible.git \
                 git@github.com:duganchen/vim-soy.git \
                 git@github.com:tpope/vim-surround.git \
+                git@github.com:wting/rust.vim.git \
                 git@github.com:avakhov/vim-yaml.git; do
 
         # only clone the plugin if it doesn't exist yet
