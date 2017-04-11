@@ -1,4 +1,7 @@
 # basics
+export VISUAL=vim
+export EDITOR=$VISUAL
+
 export PATH=~/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin
 alias notify='/Applications/terminal-notifier_1.4.2/terminal-notifier.app/Contents/MacOS/terminal-notifier'
 alias sane='echo -e "\\033c";tput is2; \'·
