@@ -84,6 +84,12 @@ install_kegs () {
     # Linux vs BSD
     brew install coreutils
 
+    # graphing
+    brew install dot
+
+    # Elixir
+    brew install elixir
+
     # Tried and gave up and will try again
     brew install emacs --with-cocoa
 
@@ -101,6 +107,9 @@ install_kegs () {
 
     # gpg
     brew install gpg
+
+    # gpg
+    brew install graphviz
 
     # Nicer top
     brew install htop-osx
@@ -187,6 +196,7 @@ function install_casks () {
 
 
     brew cask install --appdir="${HOME}/Applications" \
+        arduino \
         caffeine \
         chromecast \
         cyberduck \
@@ -203,6 +213,8 @@ function install_casks () {
         karabiner \
         keyboard-cleaner \
         kindle \
+        licecap \
+        mysql \
         mysqlworkbench \
         screenhero \
         skitch \
@@ -235,6 +247,12 @@ function setup_python () {
     done
 
     success "Setup Python virtual environments"
+}
+
+function setup_ruby () {
+    # super basic
+    gem install bundler
+    success "Setup Ruby environment"
 }
 
 function fetch_themes () {
@@ -512,6 +530,7 @@ if [ $0 != $_ ]; then
     install_casks
     setup_git
     setup_python
+    setup_ruby
     fetch_themes
     install_dotfiles
     install_work
