@@ -58,6 +58,11 @@ complete -o default -F _pip_completion pip
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 
+# Set the title of the terminal tab
+function title {
+    echo -ne "\033]0;"$*"\007"
+}
+
 
 [ -f ~/.bashrc.work ] && source ~/.bashrc.work
 
