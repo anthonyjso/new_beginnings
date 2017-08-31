@@ -75,23 +75,15 @@ install_kegs () {
     # http://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1
     brew install bash-completion
 
-    # Install large binaries http://caskroom.io/
-    brew install caskroom/cask/brew-cask
-
-    # Emacs dep management
-    brew install cask
-
     # Linux vs BSD
     brew install coreutils
-
-    # graphing
-    brew install dot
 
     # Elixir
     brew install elixir
 
     # Tried and gave up and will try again
-    brew install emacs --with-cocoa
+    # brew install emacs --with-cocoa
+    git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
     # ascii art
     brew install figlet
@@ -172,9 +164,6 @@ install_kegs () {
     # node...
     brew install npm
 
-    # vim
-    brew install macvim --with-lua --with-override-system-vim
-
     # jenv
     brew install jenv
 
@@ -194,7 +183,7 @@ function install_casks () {
     # evernote, clamxav, google-chrome, 1Password
     # Manually: little-snitch, alfred, pycharm pro
 
-
+    brew tap caskroom/cask
     brew cask install --appdir="${HOME}/Applications" \
         arduino \
         caffeine \
@@ -216,7 +205,6 @@ function install_casks () {
         licecap \
         mysql \
         mysqlworkbench \
-        screenhero \
         skitch \
         spectacle \
         spotify \
