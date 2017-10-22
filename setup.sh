@@ -91,6 +91,9 @@ install_kegs () {
     # no looking back at SVN
     brew install git
 
+    # java build tool
+    brew install gradle
+
     # gnu sed
     brew install gnu-sed --with-default-names
 
@@ -111,6 +114,9 @@ install_kegs () {
 
     # Maven for building Java projects
     brew install maven
+
+    # To avoid forgetting sql
+    brew install mycli
 
     # SSL
     brew install openssl
@@ -173,6 +179,9 @@ install_kegs () {
     # Command line json querying
     brew tap jmespath/jmespath
     brew install jp
+
+    # File watcher
+    brew install watchman
 
     success "Homebrew kegs installed"
 }
@@ -491,7 +500,8 @@ function setup_vim () {
                 git@github.com:duganchen/vim-soy.git \
                 git@github.com:tpope/vim-surround.git \
                 git@github.com:wting/rust.vim.git \
-                git@github.com:avakhov/vim-yaml.git; do
+                git@github.com:avakhov/vim-yaml.git \
+                git@github.com:elixir-lang/vim-elixir.git; do
 
         # only clone the plugin if it doesn't exist yet
         plugin_dir=$(echo ${repo} |cut -d '/' -f2)
