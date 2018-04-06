@@ -121,9 +121,6 @@ install_kegs () {
     # To avoid forgetting sql
     brew install mycli
 
-    # ngrok for local dev
-    brew install ngrok
-
     # SSL
     brew install openssl
 
@@ -220,6 +217,7 @@ function install_casks () {
         licecap \
         mysql \
         mysqlworkbench \
+        ngrok \
         skitch \
         spectacle \
         spotify \
