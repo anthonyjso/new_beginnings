@@ -8,6 +8,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CODE=${HOME}/code
 
 mkdir -p ${CODE}
+mkdir -p ~/bin
 
 trap 'echo "Error at $LINENO";' ERR
 
@@ -24,8 +25,7 @@ success () {
 }
 
 fail () {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
-  echo ''
+  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n" echo ''
   exit 1
 }
 
@@ -83,7 +83,10 @@ install_kegs () {
 
     # Tried and gave up and will try again
     # brew install emacs --with-cocoa
+    brew tap d12frosted/emacs-plus
+    brew install emacs-plus
     git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
 
     # ascii art
     brew install figlet
@@ -117,6 +120,9 @@ install_kegs () {
 
     # To avoid forgetting sql
     brew install mycli
+
+    # ngrok for local dev
+    brew install ngrok
 
     # SSL
     brew install openssl
@@ -458,7 +464,7 @@ function setup_osx () {
 }
 
 function install_dotfiles () {
-    [ -h ${HOME}/.bashrc ] || ln -s ${DIR}/bash/bashrc ${HOME}/.bashrc
+    [ -h ${HOME}/.bash_profile ] || ln -s ${DIR}/bash/bashrc ${HOME}/.bash_profile
     [ -h ${HOME}/.vimrc ] || ln -s ${DIR}/vim/vimrc ${HOME}/.vimrc
     success "Installed dotfiles"
 }
@@ -521,17 +527,17 @@ function setup_vim () {
 }
 
 if [ $0 != $_ ]; then
-    prereqs
-    install_xcode_clt
-    install_homebrew
-    install_kegs
-    install_casks
-    setup_git
-    setup_python
-    setup_ruby
-    fetch_themes
-    install_dotfiles
-    install_work
-    setup_osx
+    # prereqs
+    # install_xcode_clt
+    # install_homebrew
+    # install_kegs
+    # install_casks
+    # setup_git
+    # setup_python
+    # setup_ruby
+    # fetch_themes
+    # install_dotfiles
+    # install_work
+    # setup_osx
     setup_vim
 fi
