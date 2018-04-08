@@ -10,13 +10,16 @@ alias sane='echo -e "\\033c";tput is2; \'·
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-# Go
-export GOPATH=/usr/local/Cellar/go/1.5.3
-
-# virtualenv - requires virtualenvwrapper to be installed via pip3.x
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+# virtualenv
 export WORKON_HOME=~/Code/venv
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# golang
+export GOPATH=~/Code/go
+PATH=${PATH}:${GOPATH}/bin
+
 
 # AWS
 function awsenv() {
@@ -63,4 +66,3 @@ function title {
 
 
 [ -f ~/.bashrc.work ] && source ~/.bashrc.work
-
