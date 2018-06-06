@@ -133,6 +133,9 @@ install_kegs () {
     # Bread and butter
     brew install python
 
+    # weigh against ag
+    brew install ripgrep
+
     # Highlight source with less
     brew install source-highlight
 

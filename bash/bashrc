@@ -39,7 +39,7 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
     # display the current branch in the prompt
     RED='\[\e[031m\]'
     END_COLOR='\[\e[0m\]'
-    export PS1="${RED}${AWS_PROFILE:="-"}\$(__git_ps1 ' (%s)') ${END_COLOR}👻  "
+    export PS1="${RED}${AWS_PROFILE:="-"}\$(__git_ps1 ' (%s)') ${END_COLOR} "
 else
     printf "No bash completion located at %s" $(brew --prefix)
 fi
