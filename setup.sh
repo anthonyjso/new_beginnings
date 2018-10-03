@@ -112,6 +112,9 @@ install_kegs () {
     # Nicer top
     brew install htop-osx
 
+    # Augments git and adds cli to interface with github
+    brew install hub
+
     # Parse and filter JSON from the command line
     brew install jmespath
 
