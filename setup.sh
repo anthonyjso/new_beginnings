@@ -265,6 +265,10 @@ function setup_ruby () {
     success "Setup Ruby environment"
 }
 
+function setup_reasonml () {
+    yarn global add bs-platform
+}
+
 function fetch_themes () {
 
     for repo in git@github.com:neil477/base16-emacs.git \
@@ -542,6 +546,7 @@ if [ $0 != $_ ]; then
     # setup_git
     # setup_python
     # setup_ruby
+    # setup_reasonml
     # fetch_themes
     # install_dotfiles
     # install_work
