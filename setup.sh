@@ -192,6 +192,9 @@ install_kegs () {
     # File watcher
     brew install watchman
 
+    # yarn
+    brew install yarn
+
     success "Homebrew kegs installed"
 }
 
