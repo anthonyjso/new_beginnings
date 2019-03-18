@@ -195,6 +195,9 @@ install_kegs () {
     # File watcher
     brew install watchman
 
+    # yarn
+    brew install yarn
+
     success "Homebrew kegs installed"
 }
 
@@ -263,6 +266,10 @@ function setup_ruby () {
     # super basic
     gem install bundler
     success "Setup Ruby environment"
+}
+
+function setup_reasonml () {
+    yarn global add bs-platform
 }
 
 function fetch_themes () {
@@ -533,6 +540,12 @@ function setup_vim () {
     done
 }
 
+install_fonts () {
+    font_dir=~/Library/Fonts
+    curl -o /tmp/FiraCode_1.206.zip https://github.com/tonsky/FiraCode/releases/download/1.206/FiraCode_1.206.zip
+    unzip /tmp/FiraCode_1.206.zip -d $font_dir
+}
+
 if [ $0 != $_ ]; then
     # prereqs
     # install_xcode_clt
@@ -542,9 +555,11 @@ if [ $0 != $_ ]; then
     # setup_git
     # setup_python
     # setup_ruby
+    # setup_reasonml
     # fetch_themes
     # install_dotfiles
     # install_work
     # setup_osx
+    # install_fonts
     setup_vim
 fi
