@@ -133,6 +133,9 @@ install_kegs () {
     # Run processes in parallel
     brew install parallel
 
+    # Diagrams
+    brew install plantuml
+
     # Bread and butter
     brew install python
 
