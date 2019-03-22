@@ -389,6 +389,9 @@ function setup_osx () {
     # Change minimize/maximize window effect
     defaults write com.apple.dock mineffect -string "scale"
 
+    # Reduce motion
+    defaults write com.apple.Accessibility ReduceMotionEnabled -bool true
+
     # Minimize windows into their application’s icon
     defaults write com.apple.dock minimize-to-application -bool true
 
