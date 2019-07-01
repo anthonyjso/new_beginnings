@@ -210,6 +210,7 @@ function install_casks () {
     brew tap caskroom/cask
     brew cask install --appdir="${HOME}/Applications" \
         arduino \
+        boostnotes \
         caffeine \
         chromecast \
         cyberduck \
