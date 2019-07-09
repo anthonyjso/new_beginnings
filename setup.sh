@@ -215,6 +215,7 @@ function install_casks () {
         kindle \
         licecap \
         ngrok \
+        qbserve \
         pycharm \
         skitch \
         spectacle \
