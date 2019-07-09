@@ -87,7 +87,6 @@ install_kegs () {
     brew install emacs-plus
     git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
-
     # ascii art
     brew install figlet
 
@@ -106,14 +105,11 @@ install_kegs () {
     # gpg
     brew install gpg
 
-    # gpg
+    # graphviz
     brew install graphviz
 
     # Nicer top
     brew install htop-osx
-
-    # Augments git and adds cli to interface with github
-    brew install hub
 
     # Parse and filter JSON from the command line
     brew install jmespath
@@ -126,9 +122,6 @@ install_kegs () {
 
     # SSL
     brew install openssl
-
-    # Create machine images
-    brew install packer
 
     # Run processes in parallel
     brew install parallel
@@ -149,7 +142,7 @@ install_kegs () {
     brew install sqlite
 
     # OCR
-    brew install tesseract
+    # brew install tesseract
 
     # Nicer than mdfind and fast
     brew install the_silver_searcher
@@ -165,7 +158,6 @@ install_kegs () {
 
     # For those C explorations
     brew install --HEAD valgrind
-
 
     # Required by coreutils
     brew install xz
@@ -209,18 +201,12 @@ function install_casks () {
 
     brew tap caskroom/cask
     brew cask install --appdir="${HOME}/Applications" \
-        arduino \
         boostnotes \
         caffeine \
-        chromecast \
-        cyberduck \
         docker \
         dropbox \
         firefox \
-        flux \
         gas-mask \
-        github-desktop \
-        hostbuddy \
         intellij-idea-ce \
         iterm2 \
         java \
@@ -228,14 +214,11 @@ function install_casks () {
         keyboard-cleaner \
         kindle \
         licecap \
-        mysql \
-        mysqlworkbench \
         ngrok \
+        pycharm \
         skitch \
         spectacle \
-        spotify \
-        vagrant \
-        virtualbox
+        spotify
 
     ln -s ${HOME}/Applications/Docker.app/Contents/Resources/etc/docker.bash-completion /usr/local/etc/bash_completion.d/docker
     ln -s ${HOME}/Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion /usr/local/etc/bash_completion.d/docker-machine
