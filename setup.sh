@@ -550,6 +550,11 @@ install_fonts () {
     unzip /tmp/FiraCode_1.206.zip -d $font_dir
 }
 
+install_hours () {
+    [ -d ~/bin ] || mkdir ~/bin
+    [ -L ~/bin/hours ] || ln -s ${DIR}/hours ~/bin/hours
+}
+
 if [ $0 != $_ ]; then
     # prereqs
     # install_xcode_clt
@@ -565,5 +570,6 @@ if [ $0 != $_ ]; then
     # install_work
     # setup_osx
     # install_fonts
-    setup_vim
+    # setup_vim
+    install_hours
 fi
