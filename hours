@@ -9,8 +9,7 @@ import sys
 from datetime import datetime, timedelta
 from string import Template
 
-t = """
-# $start
+t = """# $start
 
 ## Goals
 - .
