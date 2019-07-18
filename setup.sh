@@ -184,6 +184,9 @@ install_kegs () {
     brew tap jmespath/jmespath
     brew install jp
 
+    # rustup
+    brew install rustup
+
     # File watcher
     brew install watchman
 
