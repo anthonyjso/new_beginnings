@@ -27,16 +27,16 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-v', dest='verbose', action='store_true')
     args = parser.parse_args()
-    start = datetime.now().replace(hour=9, minute=0, second=0, microsecond=0)
-    blocks = [60,60,60,60,60,60,60,60,60]
+    start = datetime.now().replace(hour=8, minute=0, second=0, microsecond=0)
+    blocks = [105,15,15,105,60,60,60,60,60,60,60]
     hours = []
-    h_t = "{:%I:%M} - {:%I:%M}:"
+    h_t = "{:%I:%M} - {:%I:%M}"
     block_start = start
     for block in blocks:
         block_end = block_start + timedelta(minutes=block)
         hours.append(h_t.format(block_start, block_end))
         block_start = block_end
-    hours_output = '\n- .\n'.join(hours)
+    hours_output = '\n- .\n\n'.join(hours)
     # output = f"# {start:%Y-%m-%d}\n\n## Goals\n- .\n\n## Hours\n{hours_output}"
     output = template.substitute({"start": f"{start:%Y-%m-%d}", "hours_output": hours_output})
     if args.verbose:
