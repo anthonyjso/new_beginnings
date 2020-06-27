@@ -5,7 +5,7 @@
 ################################################################################
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-CODE=${HOME}/code
+CODE=${HOME}/Code
 
 mkdir -p ${CODE}
 mkdir -p ~/bin
@@ -79,7 +79,7 @@ install_kegs () {
     brew install coreutils
 
     # Elixir
-    brew install elixir
+    # brew install elixir
 
     # Tried and gave up and will try again
     # brew install emacs --with-cocoa
@@ -94,13 +94,13 @@ install_kegs () {
     brew install git
 
     # java build tool
-    brew install gradle
+    # brew install gradle
 
     # gnu sed
     brew install gnu-sed --with-default-names
 
     # Eventually I'll sit down and write something with it
-    brew install go
+    # brew install go
 
     # gpg
     brew install gpg
@@ -115,10 +115,10 @@ install_kegs () {
     brew install jmespath
 
     # Maven for building Java projects
-    brew install maven
+    # brew install maven
 
     # To avoid forgetting sql
-    brew install mycli
+    # brew install mycli
 
     # SSL
     brew install openssl
@@ -131,6 +131,7 @@ install_kegs () {
 
     # Bread and butter
     brew install python
+    brew install python3
 
     # weigh against ag
     brew install ripgrep
@@ -157,7 +158,7 @@ install_kegs () {
     brew install unrar
 
     # For those C explorations
-    brew install --HEAD valgrind
+    # brew install --HEAD valgrind
 
     # Required by coreutils
     brew install xz
@@ -175,7 +176,7 @@ install_kegs () {
     brew install npm
 
     # jenv
-    brew install jenv
+    # brew install jenv
 
     # ruby and rbenv
     brew install rbenv ruby-build
@@ -204,7 +205,7 @@ function install_casks () {
 
     brew tap caskroom/cask
     brew cask install --appdir="${HOME}/Applications" \
-        boostnotes \
+        boostnote \
         caffeine \
         docker \
         dropbox \
@@ -212,14 +213,14 @@ function install_casks () {
         gas-mask \
         intellij-idea-ce \
         iterm2 \
-        java \
-        karabiner \
+        # java \
+        # karabiner \
         keyboard-cleaner \
         kindle \
         licecap \
         ngrok \
         qbserve \
-        pycharm \
+        # pycharm \
         skitch \
         spectacle \
         spotify
@@ -240,7 +241,7 @@ function setup_git () {
 
 function setup_python () {
     mkdir -p ${CODE}/venv
-    pip install virtualenv virtualenvwrapper
+    pip3 install virtualenv virtualenvwrapper
     for custom_script in ${DIR}/virtualenvwrapper/*; do
         script=$(basename ${custom_script})
         [ -f ${CODE}/venv/${script} ] && mv ${CODE}/venv/${script}.bak
@@ -481,10 +482,6 @@ function install_work () {
 
 function setup_vim () {
     #pathogen
-    mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-
-
     for repo in git@github.com:othree/yajs.vim.git \
                 git@github.com:rking/ag.vim.git \
                 git@github.com:tacahiroy/ctrlp-funky.git \
@@ -546,10 +543,10 @@ if [ $0 != $_ ]; then
     # prereqs
     # install_xcode_clt
     # install_homebrew
-    # install_kegs
+    install_kegs
     # install_casks
     # setup_git
-    # setup_python
+    setup_python
     # setup_ruby
     # setup_reasonml
     # fetch_themes
@@ -558,5 +555,5 @@ if [ $0 != $_ ]; then
     # setup_osx
     # install_fonts
     # setup_vim
-    install_hours
+    # install_hours
 fi
