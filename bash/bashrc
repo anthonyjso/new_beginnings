@@ -6,7 +6,7 @@ export EDITOR=$VISUAL
 HISTSIZE=
 HISTFILESIZE=
 
-export PATH=~/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin
 alias notify='/Applications/terminal-notifier_1.4.2/terminal-notifier.app/Contents/MacOS/terminal-notifier'
 alias sane='echo -e "\\033c";tput is2; \'·
 
@@ -72,4 +72,11 @@ function json_to_yaml {
     python3 -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, default_flow_style=False)'
 }
 
+# node version management
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 [ -f ~/.bashrc.work ] && source ~/.bashrc.work
+
+source /Users/aso/Library/Preferences/org.dystroy.broot/launcher/bash/br
