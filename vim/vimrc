@@ -1,82 +1,8 @@
-" Remap leader
-let mapleader = ","
-
-filetype plugin indent on
-syntax on
-
-" ctrlp "
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(pyc)$',
-  \ }
-
-let g:ctrlp_match_window = 'top'
-let g:ctrlp_extensions = ['funky']
-nnoremap <Leader>b :CtrlPMRU<Cr>
-" mimic ST
-nnoremap <Leader>r :CtrlPFunky<Cr>
-
-
-" Enable the mouse
-set mouse=a
-
-" Set the default clipboard to unnamed
-set clipboard=unnamed
-
-" Map NERDTreeToggle to act like ST
-map <C-k><C-b> :NERDTreeToggle<CR>
-
 " Expand tab
 set expandtab
 set tabstop=4
 set shiftwidth=4
 
-" Enable gutter numbers
-set nu
-
-" Whitespace highlighting
-set list listchars=tab:→\ ,trail:·
-highlight WhitespaceEOL ctermbg=red guibg=red
-match WhitespaceEOL /\s\+$/
-
-if exists('+colorcolumn')
-  set colorcolumn=120
-else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>120v.\+', -1)
-endif
-
-
-" vim-markdown
-let g:vim_markdown_folding_disabled=1
-
-" remap Emmet key
-" let g:user_emmet_leader_key='<C-Z>'
-
-" reactjs configuration
-let g:jsx_ext_required = 0
-
-let g:syntastic_mode_map = { 'mode': 'passive',
-                          \ 'active_filetypes': [],
-                          \ 'passive_filetypes': [] }
-nnoremap <silent> <F5> :SyntasticCheck<CR>
-let g:syntastic_javascript_checkers = ['eslint']
-
-" Delete trailing whitespace
-fun! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
-endfun
-
-autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-
-" UltiSnip"
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " add yaml stuffs
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
@@ -87,3 +13,9 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+" Enable syntax
+syntax on
+
+" Enable use of FZF
+" set rtp+=/usr/local/opt/fzf
