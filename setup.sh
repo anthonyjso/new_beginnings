@@ -90,6 +90,11 @@ install_kegs () {
     # ascii art
     brew install figlet
 
+    # FZF, rigrep, and fd for fuzzy finding and searching
+    brew install fd
+    brew install fzf
+    brew install ripgrep
+
     # no looking back at SVN
     brew install git
 
