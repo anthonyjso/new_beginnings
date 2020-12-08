@@ -123,7 +123,12 @@ install_kegs () {
     # brew install maven
 
     # To avoid forgetting sql
-    # brew install mycli
+    brew install mycli
+
+
+    # For Node/TS development
+    brew install nvm
+    brew install npm
 
     # SSL
     brew install openssl
@@ -138,8 +143,8 @@ install_kegs () {
     brew install python
     brew install python3
 
-    # weigh against ag
-    brew install ripgrep
+    # A shell script static analysis tool
+    brew install shellcheck
 
     # Highlight source with less
     brew install source-highlight
@@ -149,9 +154,6 @@ install_kegs () {
 
     # OCR
     # brew install tesseract
-
-    # Nicer than mdfind and fast
-    brew install the_silver_searcher
 
     # Terminal multiplexer
     brew install tmux
@@ -548,7 +550,7 @@ if [ $0 != $_ ]; then
     # prereqs
     # install_xcode_clt
     # install_homebrew
-    install_kegs
+    # install_kegs
     # install_casks
     # setup_git
     setup_python
