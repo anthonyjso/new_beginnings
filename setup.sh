@@ -160,9 +160,6 @@ install_kegs () {
     # OCR
     # brew install tesseract
 
-    # Terminal multiplexer
-    brew install tmux
-
     # Print dirs out as a tree
     brew install tree
 
@@ -501,7 +498,10 @@ function install_work () {
 }
 
 function setup_tmux () {
-    [ -h ~/.tmux.conf ] || ln -s ${DIR}/tmux/tmux.conf ~/.tmux.conf
+    # Terminal multiplexer
+    brew install tmux
+
+    [ -h ~/.tmux.conf ] || ln -s ${DIR}/tmux/tmux.conf "${HOME}"/.tmux.conf
 }
 
 function setup_nvim () {
