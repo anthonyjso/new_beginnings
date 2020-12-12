@@ -507,13 +507,13 @@ function setup_tmux () {
     # Terminal multiplexer
     brew install tmux
 
-    [ -h ~/.tmux.conf ] || ln -s ${DIR}/tmux/tmux.conf "${HOME}"/.tmux.conf
+    [ -h ~/.tmux.conf ] || ln -s "${DIR}"/tmux/tmux.conf "${HOME}"/.tmux.conf
 }
 
 function setup_nvim () {
     [ -f /usr/local/bin/nvim ] || brew install neovim
     [ -d ~/.config/nvim/ ] || mkdir -p "$HOME"/.config/nvim
-    [ -h ~/.config/nvim/init.vim ] || ln -s ${DIR}/nvim/init.vim "$HOME"/.config/nvim/init.vim
+    [ -h ~/.config/nvim/init.vim ] || ln -s "${DIR}"/nvim/init.vim "$HOME"/.config/nvim/init.vim
 
     repos=(
         git@github.com:junegunn/fzf.vim.git
