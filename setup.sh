@@ -505,6 +505,7 @@ function setup_tmux () {
 }
 
 function setup_nvim () {
+    brew install neovim
     [ -d ~/.config/nvim/ ] || mkdir -p "$HOME"/.config/nvim
     [ -h ~/.config/nvim/init.vim ] || ln -s ${DIR}/nvim/init.vim "$HOME"/.config/nvim/init.vim
 
