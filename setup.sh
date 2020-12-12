@@ -5,7 +5,7 @@
 ################################################################################
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-CODE=${HOME}/code
+CODE=${HOME}/Code
 
 mkdir -p "${CODE}"
 mkdir -p ~/bin
@@ -84,7 +84,7 @@ install_kegs () {
     brew install leiningen
 
     # Elixir
-    brew install elixir
+    # brew install elixir
 
     # Tried and gave up and will try again
     # brew install emacs --with-cocoa
@@ -95,17 +95,22 @@ install_kegs () {
     # ascii art
     brew install figlet
 
+    # FZF, rigrep, and fd for fuzzy finding and searching
+    brew install fd
+    brew install fzf
+    brew install ripgrep
+
     # no looking back at SVN
     brew install git
 
     # java build tool
-    brew install gradle
+    # brew install gradle
 
     # gnu sed
     brew install gnu-sed --with-default-names
 
     # Eventually I'll sit down and write something with it
-    brew install go
+    # brew install go
 
     # gpg
     brew install gpg
@@ -120,10 +125,15 @@ install_kegs () {
     brew install jmespath
 
     # Maven for building Java projects
-    brew install maven
+    # brew install maven
 
     # To avoid forgetting sql
     brew install mycli
+
+
+    # For Node/TS development
+    brew install nvm
+    brew install npm
 
     # SSL
     brew install openssl
@@ -136,9 +146,10 @@ install_kegs () {
 
     # Bread and butter
     brew install python
+    brew install python3
 
-    # weigh against ag
-    brew install ripgrep
+    # A shell script static analysis tool
+    brew install shellcheck
 
     # Highlight source with less
     brew install source-highlight
@@ -148,9 +159,6 @@ install_kegs () {
 
     # OCR
     # brew install tesseract
-
-    # Nicer than mdfind and fast
-    brew install the_silver_searcher
 
     # Terminal multiplexer
     brew install tmux
@@ -162,7 +170,7 @@ install_kegs () {
     brew install unrar
 
     # For those C explorations
-    brew install --HEAD valgrind
+    # brew install --HEAD valgrind
 
     # Required by coreutils
     brew install xz
@@ -180,7 +188,7 @@ install_kegs () {
     brew install npm
 
     # jenv
-    brew install jenv
+    # brew install jenv
 
     # ruby and rbenv
     brew install rbenv ruby-build
@@ -212,7 +220,7 @@ function install_casks () {
 
     brew tap caskroom/cask
     brew cask install --appdir="${HOME}/Applications" \
-        boostnotes \
+        boostnote \
         caffeine \
         docker \
         dropbox \
@@ -220,14 +228,14 @@ function install_casks () {
         gas-mask \
         intellij-idea-ce \
         iterm2 \
-        java \
-        karabiner \
+        # java \
+        # karabiner \
         keyboard-cleaner \
         kindle \
         licecap \
         ngrok \
         qbserve \
-        pycharm \
+        # pycharm \
         skitch \
         spectacle \
         spotify
@@ -484,7 +492,6 @@ function setup_osx () {
 
 function install_dotfiles () {
     [ -h "${HOME}/.bash_profile" ] || ln -s "${DIR}/bash/bashrc" "${HOME}/.bash_profile"
-    [ -h "${HOME}/.vimrc" ] || ln -s "${DIR}/vim/vimrc" "${HOME}/.vimrc"
     success "Installed dotfiles"
 }
 
@@ -493,61 +500,30 @@ function install_work () {
     info 'install work'
 }
 
+function setup_tmux () {
+    [ -h ~/.tmux.conf ] || ln -s ${DIR}/tmux/tmux.conf ~/.tmux.conf
+}
 
+function setup_nvim () {
+    [ -d ~/.config/nvim/ ] || mkdir -p "$HOME"/.config/nvim
+    [ -h ~/.config/nvim/init.vim ] || ln -s ${DIR}/nvim/init.vim "$HOME"/.config/nvim/init.vim
 
-function setup_vim () {
-    # Setup vim packages for version 8.x and above
-    mkdir -p ~/.vim/pack/plugins/{opt,start}
-    pushd ~/.vim/pack/plugins/start
-    for repo in https://github.com/cespare/vim-toml.git \
-	   	https://github.com/rust-lang/rust.vim; do
-	git clone $repo 
-    done
+    repos=(
+        git@github.com:junegunn/fzf.vim.git
+        git@github.com:junegunn/goyo.vim.git
+        git@github.com:junegunn/limelight.vim.git
+        git@github.com:neoclide/coc.nvim.git
+        git@github.com:christoomey/vim-tmux-navigator.git
+        https://github.com/jpalardy/vim-slime.git
+        git@github.com:tpope/vim-surround.git
+    )
 
-    # for repo in git@github.com:othree/yajs.vim.git \
-    #             git@github.com:rking/ag.vim.git \
-    #             git@github.com:tacahiroy/ctrlp-funky.git \
-    #             git@github.com:kien/ctrlp.vim.git \
-    #             git@github.com:Raimondi/delimitMate.git \
-    #             git@github.com:mattn/emmet-vim.git \
-    #             git@github.com:scrooloose/nerdtree.git \
-    #             git@github.com:kien/rainbow_parentheses.vim.git \
-    #             git@github.com:vim-scripts/slimv.vim.git \
-    #             git@github.com:scrooloose/syntastic.git \
-    #             git@github.com:vim-scripts/taglist.vim.git \
-    #             git@github.com:craigemery/vim-autotag.git \
-    #             git@github.com:skammer/vim-css-color.git \
-    #             git@github.com:tpope/vim-fugitive.git \
-    #             git@github.com:vitaly/vim-gitignore.git \
-    #             git@github.com:pangloss/vim-javascript.git \
-    #             git@github.com:jelera/vim-javascript-syntax.git \
-    #             git@github.com:tpope/vim-jdaddy.git \
-    #             git@github.com:heavenshell/vim-jsdoc.git \
-    #             git@github.com:mxw/vim-jsx.git \
-    #             git@github.com:plasticboy/vim-markdown.git \
-    #             git@github.com:edsono/vim-matchit.git \
-    #             git@github.com:tpope/vim-sensible.git \
-    #             git@github.com:duganchen/vim-soy.git \
-    #             git@github.com:tpope/vim-surround.git \
-    #             git@github.com:wting/rust.vim.git \
-    #             git@github.com:avakhov/vim-yaml.git \
-    #             git@github.com:elixir-lang/vim-elixir.git; do
-
-    #     # only clone the plugin if it doesn't exist yet
-    #     plugin_dir=$(echo ${repo} |cut -d '/' -f2)
-    #     plugin_dir=${plugin_dir%.git}
-    #     [ -d ~/.vim/bundle/${plugin_dir} ] || git -C ~/.vim/bundle clone ${repo}
-    # done
-    popd
-
-    # Symlink themes
-    mkdir -p "${HOME}/.vim/colors"
-    for theme_repo in ${CODE}/vim-tomorrow-theme \
-                 ${CODE}/base16-vim; do
-        for theme in "${theme_repo}"/colors/*; do
-            link_name="$HOME"/.vim/colors/$(basename "${theme}")
-            [ -L "${link_name}" ] || ln -s "${theme}" "${link_name}"
-        done
+    for repo in ${repos[*]}; do
+        to_dir=$(basename "$repo" | sed "s#\.git##g")
+        to_path="$HOME/.config/nvim/pack/packages/start/${to_dir}"
+        if [ ! -d "$to_path" ] ; then
+            git clone "$repo" "${to_path}"
+        fi
     done
 }
 
@@ -577,6 +553,7 @@ if [ "$0" != "$_" ]; then
     # install_work
     # setup_osx
     # install_fonts
-    # setup_vim
-    install_hours
+    setup_nvim
+    # setup_tmux
+    # install_hours
 fi
