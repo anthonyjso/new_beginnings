@@ -7,7 +7,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CODE=${HOME}/Code
 
-mkdir -p ${CODE}
+mkdir -p "${CODE}"
 mkdir -p ~/bin
 
 trap 'echo "Error at $LINENO";' ERR
@@ -478,7 +478,6 @@ function setup_osx () {
 
 function install_dotfiles () {
     [ -h ${HOME}/.bash_profile ] || ln -s ${DIR}/bash/bashrc ${HOME}/.bash_profile
-    [ -h ${HOME}/.vimrc ] || ln -s ${DIR}/vim/vimrc ${HOME}/.vimrc
     success "Installed dotfiles"
 }
 
@@ -487,51 +486,31 @@ function install_work () {
     info 'install work'
 }
 
-function setup_vim () {
-    #pathogen
-    for repo in git@github.com:othree/yajs.vim.git \
-                git@github.com:rking/ag.vim.git \
-                git@github.com:tacahiroy/ctrlp-funky.git \
-                git@github.com:kien/ctrlp.vim.git \
-                git@github.com:Raimondi/delimitMate.git \
-                git@github.com:mattn/emmet-vim.git \
-                git@github.com:scrooloose/nerdtree.git \
-                git@github.com:kien/rainbow_parentheses.vim.git \
-                git@github.com:vim-scripts/slimv.vim.git \
-                git@github.com:scrooloose/syntastic.git \
-                git@github.com:vim-scripts/taglist.vim.git \
-                git@github.com:craigemery/vim-autotag.git \
-                git@github.com:skammer/vim-css-color.git \
-                git@github.com:tpope/vim-fugitive.git \
-                git@github.com:vitaly/vim-gitignore.git \
-                git@github.com:pangloss/vim-javascript.git \
-                git@github.com:jelera/vim-javascript-syntax.git \
-                git@github.com:tpope/vim-jdaddy.git \
-                git@github.com:heavenshell/vim-jsdoc.git \
-                git@github.com:mxw/vim-jsx.git \
-                git@github.com:plasticboy/vim-markdown.git \
-                git@github.com:edsono/vim-matchit.git \
-                git@github.com:tpope/vim-sensible.git \
-                git@github.com:duganchen/vim-soy.git \
-                git@github.com:tpope/vim-surround.git \
-                git@github.com:wting/rust.vim.git \
-                git@github.com:avakhov/vim-yaml.git \
-                git@github.com:elixir-lang/vim-elixir.git; do
+function setup_tmux () {
+    [ -h ~/.tmux.conf ] || ln -s ${DIR}/tmux/tmux.conf ~/.tmux.conf
+}
 
-        # only clone the plugin if it doesn't exist yet
-        plugin_dir=$(echo ${repo} |cut -d '/' -f2)
-        plugin_dir=${plugin_dir%.git}
-        [ -d ~/.vim/bundle/${plugin_dir} ] || git -C ~/.vim/bundle clone ${repo}
-    done
+function setup_nvim () {
+    [ -d ~/.config/nvim/ ] || mkdir -p "$HOME"/.config/nvim
+    [ -h ~/.config/nvim/init.vim ] || ln -s ${DIR}/nvim/init.vim "$HOME"/.config/nvim/init.vim
 
-    # Symlink themes
-    mkdir -p ${HOME}/.vim/colors
-    for theme_repo in ${CODE}/vim-tomorrow-theme \
-                 ${CODE}/base16-vim; do
-        for theme in ${theme_repo}/colors/*; do
-            link_name=~/.vim/colors/$(basename ${theme})
-            [ -L ${link_name} ] || ln -s ${theme} ${link_name}
-        done
+    repos=(
+        git@github.com:junegunn/fzf.vim.git
+        git@github.com:junegunn/goyo.vim.git
+        git@github.com:junegunn/limelight.vim.git
+        git@github.com:neoclide/coc.nvim.git
+        git@github.com:christoomey/vim-tmux-navigator.git
+        https://github.com/jpalardy/vim-slime.git
+        git@github.com:tpope/vim-surround.git
+    )
+
+    for repo in ${repos[*]}; do
+        to_dir=$(basename "$repo" | sed "s#\.git##g")
+        to_path="$HOME/.config/nvim/pack/packages/start/${to_dir}"
+        if [ ! -d "$to_path" ] ; then
+            git clone "$repo" "${to_path}"
+        f
+
     done
 }
 
@@ -553,7 +532,7 @@ if [ $0 != $_ ]; then
     # install_kegs
     # install_casks
     # setup_git
-    setup_python
+    # setup_python
     # setup_ruby
     # setup_reasonml
     # fetch_themes
@@ -561,6 +540,7 @@ if [ $0 != $_ ]; then
     # install_work
     # setup_osx
     # install_fonts
-    # setup_vim
+    setup_nvim
+    # setup_tmux
     # install_hours
 fi
