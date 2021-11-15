@@ -13,27 +13,28 @@ mkdir -p ~/bin
 trap 'echo "Error at $LINENO";' ERR
 
 info () {
-  printf "  [ \033[00;34m..\033[0m ] $1\n"
+  printf "  [ \033[00;34m..\033[0m ] %s\n" "$1"
 }
 
 user () {
-  printf "\r  [ \033[0;33m?\033[0m ] $1\n"
+  printf "\r  [ \033[0;33m?\033[0m ] %s\n" "$1"
 }
 
 success () {
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] %s\n" "$1"
 }
 
 fail () {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n" echo ''
+  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] %s\n" "$1"
+  echo ''
   exit 1
 }
 
 # SSH keys required to access Git repos, etc
 prereqs () {
 
-    [ $(find ~/.ssh | wc -l) -gt 0 ] || fail "SSH keys required."
-    key_installed=$(ssh-add -L | grep id_rsa)
+    [ "$(find ~/.ssh | wc -l)" -gt 0 ] || fail "SSH keys required."
+    ssh-add -L | grep id_rsa
     [ $? ] || ssh-add -K ~/.ssh/id_rsa
 
 }
@@ -42,7 +43,7 @@ prereqs () {
 # https://github.com/chcokr/osx-init/blob/master/install.sh
 # https://github.com/timsutton/osx-vm-templates/blob/ce8df8a7468faa7c5312444ece1b977c1b2f77a4/scripts/xcode-cli-tools.sh
 install_xcode_clt () {
-    if [ ! $(which gcc) ]; then
+    if [ ! "$(which gcc)" ]; then
         touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
         PROD=$(softwareupdate -l |
         grep "\*.*Command Line" |
@@ -57,12 +58,12 @@ install_xcode_clt () {
 
 # Install Homebrew package manager.
 install_homebrew () {
-    if [ ! $(which brew) ]; then
+    if [ ! "$(which brew)" ]; then
         # This can be automated to just untar the tarball and symlink the bin
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
     info "Updating Homebrew"
-    [ -O /usr/local ] || sudo chown ${USER}:admin /usr/local
+    [ -O /usr/local ] || sudo chown "${USER}:admin" /usr/local
     brew update
     brew upgrade
     brew cleanup
@@ -77,6 +78,10 @@ install_kegs () {
 
     # Linux vs BSD
     brew install coreutils
+
+    # Clojure
+    brew install clojure
+    brew install leiningen
 
     # Elixir
     # brew install elixir
@@ -198,6 +203,9 @@ install_kegs () {
     # rustup
     brew install rustup
 
+    # -shellcheck
+    brew install shellcheck
+
     # File watcher
     brew install watchman
 
@@ -235,9 +243,9 @@ function install_casks () {
         spectacle \
         spotify
 
-    ln -s ${HOME}/Applications/Docker.app/Contents/Resources/etc/docker.bash-completion /usr/local/etc/bash_completion.d/docker
-    ln -s ${HOME}/Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion /usr/local/etc/bash_completion.d/docker-machine
-    ln -s ${HOME}/Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion /usr/local/etc/bash_completion.d/docker-compose
+    ln -s "${HOME}/Applications/Docker.app/Contents/Resources/etc/docker.bash-completion" /usr/local/etc/bash_completion.d/docker
+    ln -s "${HOME}/Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion" /usr/local/etc/bash_completion.d/docker-machine
+    ln -s "${HOME}/Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion" /usr/local/etc/bash_completion.d/docker-compose
 
 
     success "Casks installed"
@@ -246,19 +254,24 @@ function install_casks () {
 
 function setup_git () {
    [ -f ~/.giconfig ] && mv ~/.gitconfig ~/.gitconfig.bak
-   ln -s ${DIR}/git/gitconfig ~/.gitconfig
+   ln -s "${DIR}/git/gitconfig" ~/.gitconfig
 }
 
 function setup_python () {
-    mkdir -p ${CODE}/venv
-    pip3 install virtualenv virtualenvwrapper
-    for custom_script in ${DIR}/virtualenvwrapper/*; do
-        script=$(basename ${custom_script})
-        [ -f ${CODE}/venv/${script} ] && mv ${CODE}/venv/${script}.bak
-        ln -s ${custom_script} ${CODE}/venv/${script}
+    mkdir -p "${CODE}/venv"
+    pip install virtualenv virtualenvwrapper
+    for custom_script in "${DIR}"/virtualenvwrapper/*; do
+        script=$(basename "${custom_script}")
+        [ -f "${CODE}/venv/${script}" ] && mv "${CODE}/venv/${script}" "${CODE}/venv/${script}.bak"
+        ln -s "${custom_script}" "${CODE}/venv/${script}"
     done
 
     success "Setup Python virtual environments"
+}
+
+
+function setup_rust () {
+    cargo install rusty-tags
 }
 
 function setup_ruby () {
@@ -280,8 +293,9 @@ function fetch_themes () {
         https://github.com/chriskempson/vim-tomorrow-theme.git \
         https://github.com/chriskempson/base16-vim.git; do
 
-        repo_dir=$(echo ${repo} | sed 's#.*/\(.*\).git$#\1#g')
-        [ -d ${CODE}/${repo_dir} ] || git -C $CODE clone $repo;
+    	# shellcheck disable=SC2001
+        repo_dir=$(echo "${repo}" | sed 's#.*/\(.*\).git$#\1#g')
+        [ -d "${CODE}/${repo_dir}" ] || git -C "$CODE" clone "$repo";
     done
     success "Third party repos installed"
 }
@@ -480,7 +494,7 @@ function setup_osx () {
 }
 
 function install_dotfiles () {
-    [ -h ${HOME}/.bash_profile ] || ln -s ${DIR}/bash/bashrc ${HOME}/.bash_profile
+    [ -h "${HOME}/.bash_profile" ] || ln -s "${DIR}/bash/bashrc" "${HOME}/.bash_profile"
     success "Installed dotfiles"
 }
 
@@ -490,10 +504,14 @@ function install_work () {
 }
 
 function setup_tmux () {
-    [ -h ~/.tmux.conf ] || ln -s ${DIR}/tmux/tmux.conf ~/.tmux.conf
+    # Terminal multiplexer
+    brew install tmux
+
+    [ -h ~/.tmux.conf ] || ln -s ${DIR}/tmux/tmux.conf "${HOME}"/.tmux.conf
 }
 
 function setup_nvim () {
+    [ -f /usr/local/bin/nvim ] || brew install neovim
     [ -d ~/.config/nvim/ ] || mkdir -p "$HOME"/.config/nvim
     [ -h ~/.config/nvim/init.vim ] || ln -s ${DIR}/nvim/init.vim "$HOME"/.config/nvim/init.vim
 
@@ -512,23 +530,22 @@ function setup_nvim () {
         to_path="$HOME/.config/nvim/pack/packages/start/${to_dir}"
         if [ ! -d "$to_path" ] ; then
             git clone "$repo" "${to_path}"
-        f
-
+        fi
     done
 }
 
 install_fonts () {
     font_dir=~/Library/Fonts
     curl -o /tmp/FiraCode_1.206.zip https://github.com/tonsky/FiraCode/releases/download/1.206/FiraCode_1.206.zip
-    unzip /tmp/FiraCode_1.206.zip -d $font_dir
+    unzip /tmp/FiraCode_1.206.zip -d "$font_dir"
 }
 
 install_hours () {
     [ -d ~/bin ] || mkdir ~/bin
-    [ -L ~/bin/hours ] || ln -s ${DIR}/hours ~/bin/hours
+    [ -L ~/bin/hours ] || ln -s "${DIR}/hours" ~/bin/hours
 }
 
-if [ $0 != $_ ]; then
+if [ "$0" != "$_" ]; then
     # prereqs
     # install_xcode_clt
     # install_homebrew

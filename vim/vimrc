@@ -1,8 +1,10 @@
+filetype plugin indent on
+syntax on
+
 " Expand tab
 set expandtab
 set tabstop=4
 set shiftwidth=4
-
 
 " add yaml stuffs
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
