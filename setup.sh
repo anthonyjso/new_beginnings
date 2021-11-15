@@ -155,6 +155,9 @@ install_kegs () {
     # OCR
     # brew install tesseract
 
+    # Terraform
+    brew install terraform
+
     # Terminal multiplexer
     brew install tmux
 

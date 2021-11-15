@@ -34,3 +34,7 @@ autocmd! User GoyoLeave Limelight!
 let g:slime_target = "tmux"
 let g:slime_paste_file = "$HOME/.slime_paste"
 
+
+" Delete trailing whitespace on save...
+" https://vim.fandom.com/wiki/Remove_unwanted_spaces#Automatically_removing_all_trailing_whitespace
+autocmd BufWritePre * :%s/\s\+$//e

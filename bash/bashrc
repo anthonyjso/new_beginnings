@@ -12,6 +12,8 @@ alias notify='/Applications/terminal-notifier_1.4.2/terminal-notifier.app/Conten
 alias sane='echo -e "\\033c";tput is2; \'
 alias allremotes='git branch -r | grep -v "\-\>" | while read remote; do git branch --track "${remote#origin/}" "$remote"; done'
 
+alias inbox='cd ~/Inbox'
+
 # Ruby
 # export PATH="$HOME/.rbenv/bin:$PATH"
 # eval "$(rbenv init -)"
@@ -20,7 +22,7 @@ alias allremotes='git branch -r | grep -v "\-\>" | while read remote; do git bra
 export WORKON_HOME=~/Code/venv
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
-export VIRTUAL_ENV_DISABLE_PROMPT=1
+# export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # golang
 export GOPATH=~/Code/go
@@ -39,13 +41,13 @@ function awsenv() {
 
 # bash-completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    GIT_PS1_SHOWDIRTYSTATE=1
+    #GIT_PS1_SHOWDIRTYSTATE=1
     source $(brew --prefix)/etc/bash_completion
     source ${BASH_COMPLETION_DIR}/git-prompt.sh
     # display the current branch in the prompt
-    RED='\[\e[031m\]'
-    END_COLOR='\[\e[0m\]'
-    export PS1="${RED}${AWS_PROFILE:="-"}\$(__git_ps1 ' (%s)') ${END_COLOR} "
+    # RED='\[\e[031m\]'
+    # END_COLOR='\[\e[0m\]'
+    # export PS1="${RED}${AWS_PROFILE:="-"}\$(__git_ps1 ' (%s)') ${END_COLOR} "
 else
     printf "No bash completion located at %s" $(brew --prefix)
 fi
@@ -86,3 +88,6 @@ export NVM_DIR="$HOME/.nvm"
 export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d'
+
+# https://starship.rs/guide/#%F0%9F%9A%80-installation
+eval "$(starship init bash)"
