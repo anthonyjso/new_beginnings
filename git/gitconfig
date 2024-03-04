@@ -17,7 +17,7 @@ interactive = auto
 ui = auto
 [core]
 excludesfile = /Users/aso/.gitignore_global
-editor = /usr/bin/vim
+editor = /usr/local/bin/nvim
 [credential]
 	helper = osxkeychain
 [filter "lfs"]

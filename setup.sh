@@ -145,8 +145,9 @@ install_kegs () {
     brew install plantuml
 
     # Bread and butter
-    brew install python
-    brew install python3
+    brew install pyenv
+    brew install pyenv-virtualenv
+    brew install pyenv-virtualenvwrapper
 
     # A shell script static analysis tool
     brew install shellcheck
@@ -258,13 +259,18 @@ function setup_git () {
 }
 
 function setup_python () {
-    mkdir -p "${CODE}/venv"
-    pip install virtualenv virtualenvwrapper
-    for custom_script in "${DIR}"/virtualenvwrapper/*; do
-        script=$(basename "${custom_script}")
-        [ -f "${CODE}/venv/${script}" ] && mv "${CODE}/venv/${script}" "${CODE}/venv/${script}.bak"
-        ln -s "${custom_script}" "${CODE}/venv/${script}"
-    done
+    #mkdir -p "${CODE}/venv" #pip install virtualenv virtualenvwrapper
+    #for custom_script in "${DIR}"/virtualenvwrapper/*; do
+    #    script=$(basename "${custom_script}")
+    #    [ -f "${CODE}/venv/${script}" ] && mv "${CODE}/venv/${script}" "${CODE}/venv/${script}.bak"
+    #    ln -s "${custom_script}" "${CODE}/venv/${script}"
+    #done
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+    echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+    echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
 
     success "Setup Python virtual environments"
 }
