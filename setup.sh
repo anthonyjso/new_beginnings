@@ -73,24 +73,8 @@ install_homebrew () {
 install_kegs () {
     info "Installing Homebrew kegs"
 
-    # http://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1
-    brew install bash-completion
-
     # Linux vs BSD
     brew install coreutils
-
-    # Clojure
-    brew install clojure
-    brew install leiningen
-
-    # Elixir
-    # brew install elixir
-
-    # Tried and gave up and will try again
-    # brew install emacs --with-cocoa
-    brew tap d12frosted/emacs-plus
-    brew install emacs-plus
-    git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
     # ascii art
     brew install figlet
@@ -100,17 +84,11 @@ install_kegs () {
     brew install fzf
     brew install ripgrep
 
-    # no looking back at SVN
+    # Git
     brew install git
-
-    # java build tool
-    # brew install gradle
 
     # gnu sed
     brew install gnu-sed --with-default-names
-
-    # Eventually I'll sit down and write something with it
-    # brew install go
 
     # gpg
     brew install gpg
@@ -123,13 +101,7 @@ install_kegs () {
 
     # Parse and filter JSON from the command line
     brew install jmespath
-
-    # Maven for building Java projects
-    # brew install maven
-
-    # To avoid forgetting sql
-    brew install mycli
-
+    brew install jq
 
     # For Node/TS development
     brew install nvm
@@ -152,17 +124,8 @@ install_kegs () {
     # A shell script static analysis tool
     brew install shellcheck
 
-    # Highlight source with less
-    brew install source-highlight
-
-    # Lightweight and useful DB for hacks
-    brew install sqlite
-
     # Customizable prompt for any shell
     brew install starship
-
-    # OCR
-    # brew install tesseract
 
     # Terraform
     brew install terraform
@@ -175,9 +138,6 @@ install_kegs () {
 
     # Not everything is a tar file
     brew install unrar
-
-    # For those C explorations
-    # brew install --HEAD valgrind
 
     # Required by coreutils
     brew install xz
@@ -194,27 +154,11 @@ install_kegs () {
     # node...
     brew install npm
 
-    # jenv
-    # brew install jenv
-
-    # ruby and rbenv
-    brew install rbenv ruby-build
-
-    # Command line json querying
-    brew tap jmespath/jmespath
-    brew install jp
-
     # rustup
     brew install rustup
 
-    # -shellcheck
-    brew install shellcheck
-
-    # File watcher
-    brew install watchman
-
-    # yarn
-    brew install yarn
+    # generate c/c++ interfaces for target high level lang
+    brew install swig
 
     success "Homebrew kegs installed"
 }
@@ -227,33 +171,25 @@ function install_casks () {
 
     brew tap caskroom/cask
     brew cask install --appdir="${HOME}/Applications" \
-        boostnote \
-        caffeine \
         docker \
         dropbox \
         firefox \
-        gas-mask \
         intellij-idea-ce \
         iterm2 \
-        # java \
-        # karabiner \
         keyboard-cleaner \
         kindle \
         licecap \
         ngrok \
         qbserve \
-        # pycharm \
-        skitch \
-        spectacle \
+        pycharm \
+        rectangle \
         spotify
 
     ln -s "${HOME}/Applications/Docker.app/Contents/Resources/etc/docker.bash-completion" /usr/local/etc/bash_completion.d/docker
     ln -s "${HOME}/Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion" /usr/local/etc/bash_completion.d/docker-machine
     ln -s "${HOME}/Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion" /usr/local/etc/bash_completion.d/docker-compose
 
-
     success "Casks installed"
-
 }
 
 function setup_git () {
@@ -262,12 +198,6 @@ function setup_git () {
 }
 
 function setup_python () {
-    #mkdir -p "${CODE}/venv" #pip install virtualenv virtualenvwrapper
-    #for custom_script in "${DIR}"/virtualenvwrapper/*; do
-    #    script=$(basename "${custom_script}")
-    #    [ -f "${CODE}/venv/${script}" ] && mv "${CODE}/venv/${script}" "${CODE}/venv/${script}.bak"
-    #    ln -s "${custom_script}" "${CODE}/venv/${script}"
-    #done
     echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
     echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
     echo 'eval "$(pyenv init -)"' >> ~/.bashrc
@@ -281,16 +211,6 @@ function setup_python () {
 
 function setup_rust () {
     cargo install rusty-tags
-}
-
-function setup_ruby () {
-    # super basic
-    gem install bundler
-    success "Setup Ruby environment"
-}
-
-function setup_reasonml () {
-    yarn global add bs-platform
 }
 
 function fetch_themes () {
@@ -538,7 +458,6 @@ function setup_nvim () {
         git@github.com:junegunn/limelight.vim.git
         git@github.com:neoclide/coc.nvim.git
         git@github.com:christoomey/vim-tmux-navigator.git
-        https://github.com/jpalardy/vim-slime.git
         git@github.com:tpope/vim-surround.git
     )
 
@@ -563,6 +482,7 @@ install_hours () {
 }
 
 if [ "$0" != "$_" ]; then
+    echo "Uncomment these"
     # prereqs
     # install_xcode_clt
     # install_homebrew
@@ -570,8 +490,6 @@ if [ "$0" != "$_" ]; then
     # install_casks
     # setup_git
     # setup_python
-    # setup_ruby
-    # setup_reasonml
     # fetch_themes
     # install_dotfiles
     # install_work
