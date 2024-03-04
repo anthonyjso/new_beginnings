@@ -38,34 +38,6 @@ function awsenv() {
     fi
 }
 
-# bash-completion
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    GIT_PS1_SHOWDIRTYSTATE=1
-    source $(brew --prefix)/etc/bash_completion
-    source ${BASH_COMPLETION_DIR}/git-prompt.sh
-    # display the current branch in the prompt
-    RED='\[\e[031m\]'
-    END_COLOR='\[\e[0m\]'
-    export PS1="${RED}${AWS_PROFILE:="-"}\$(__git_ps1 ' (%s)') ${END_COLOR} "
-else
-    printf "No bash completion located at %s" $(brew --prefix)
-fi
-
-
-# pip bash completion start
-_pip_completion()
-{
-    COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \
-                   COMP_CWORD=$COMP_CWORD \
-                   PIP_AUTO_COMPLETE=1 $1 ) )
-}
-complete -o default -F _pip_completion pip
-# pip bash completion end
-
-# Source highlight with less
-export LESSOPEN="| src-hilite-lesspipe.sh %s"
-export LESS=' -R '
-
 # Set the title of the terminal tab
 function title {
     echo -ne "\033]0;"$*"\007"

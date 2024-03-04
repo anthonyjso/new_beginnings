@@ -158,6 +158,9 @@ install_kegs () {
     # Lightweight and useful DB for hacks
     brew install sqlite
 
+    # Customizable prompt for any shell
+    brew install starship
+
     # OCR
     # brew install tesseract
 
@@ -566,7 +569,7 @@ if [ "$0" != "$_" ]; then
     # install_work
     # setup_osx
     # install_fonts
-    setup_nvim
+    # setup_nvim
     # setup_tmux
     # install_hours
 fi
