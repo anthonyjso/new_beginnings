@@ -517,6 +517,14 @@ function setup_tmux () {
     brew install tmux
 
     [ -h ~/.tmux.conf ] || ln -s "${DIR}"/tmux/tmux.conf "${HOME}"/.tmux.conf
+
+    # Plugin Manager
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    echo "set -g @plugin 'tmux-plugins/tpm'" >> "${HOME}"/.tmux.conf
+    echo "set -g @plugin 'tmux-plugins/tmux-sensible'" >> "${HOME}"/.tmux.conf
+    echo "set -g @plugin 'tmux-plugins/tmux-resurrect'" >> "${HOME}"/.tmux.conf
+    echo "set -g @resurrect-strategy-nvim 'session'" >> "${HOME}"/.tmux.conf
+    echo "run '~/.tmux/plugins/tpm/tpm'" >> "${HOME}"/.tmux.conf # must be at bottom
 }
 
 function setup_nvim () {
