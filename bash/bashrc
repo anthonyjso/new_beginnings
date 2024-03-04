@@ -12,7 +12,6 @@ alias notify='/Applications/terminal-notifier_1.4.2/terminal-notifier.app/Conten
 alias sane='echo -e "\\033c";tput is2; \'
 alias allremotes='git branch -r | grep -v "\-\>" | while read remote; do git branch --track "${remote#origin/}" "$remote"; done'
 
-alias inbox='cd ~/Inbox'
 
 # Ruby
 # export PATH="$HOME/.rbenv/bin:$PATH"
@@ -67,3 +66,9 @@ export FZF_ALT_C_COMMAND='fd --type d'
 
 # https://starship.rs/guide/#%F0%9F%9A%80-installation
 eval "$(starship init bash)"
+
+# Setup PARA aliases
+alias i='cd ~/Inbox'
+alias p='cd ~/Projects'
+alias a='cd ~/Areas'
+alias r='cd ~/Resources'
