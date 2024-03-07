@@ -127,8 +127,8 @@ install_kegs () {
     # Customizable prompt for any shell
     brew install starship
 
-    # Terraform
-    brew install terraform
+    # OpenTofu/Terraform
+    brew install opentofu
 
     # Terminal multiplexer
     brew install tmux
