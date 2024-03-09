@@ -73,6 +73,9 @@ install_homebrew () {
 install_kegs () {
     info "Installing Homebrew kegs"
 
+    # bash completion
+    brew install bash-completion
+
     # Linux vs BSD
     brew install coreutils
 
@@ -171,7 +174,8 @@ function install_casks () {
 
     brew tap caskroom/cask
     brew cask install --appdir="${HOME}/Applications" \
-        docker \
+        #docker \
+        colima \
         dropbox \
         firefox \
         intellij-idea-ce \
@@ -184,12 +188,9 @@ function install_casks () {
         pycharm \
         rectangle \
         spotify
-
-    ln -s "${HOME}/Applications/Docker.app/Contents/Resources/etc/docker.bash-completion" /usr/local/etc/bash_completion.d/docker
-    ln -s "${HOME}/Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion" /usr/local/etc/bash_completion.d/docker-machine
-    ln -s "${HOME}/Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion" /usr/local/etc/bash_completion.d/docker-compose
-
     success "Casks installed"
+
+    colima completion bash > /usr/local/etc/bash_completion.d/colima
 }
 
 function setup_git () {
