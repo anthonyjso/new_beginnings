@@ -178,7 +178,7 @@ function install_casks () {
 
     brew tap caskroom/cask
     brew cask install --appdir="${HOME}/Applications" \
-        #docker \
+        docker \
         colima \
         dropbox \
         firefox \
