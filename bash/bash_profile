@@ -30,3 +30,4 @@ jenv() {
     command jenv "$command" "$@";;
   esac
 }
+alias pycharm='open -na "PyCharm.app" --args "$@"'

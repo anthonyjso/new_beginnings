@@ -214,6 +214,7 @@ function setup_python () {
     echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
     echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
     echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
+    echo 'alias jb='\''open -na "PyCharm.app" --args "$@"'\''' >> ~/.bash_profile
 
     success "Setup Python virtual environments"
 }

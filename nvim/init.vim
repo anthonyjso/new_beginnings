@@ -33,3 +33,6 @@ autocmd! User GoyoLeave Limelight!
 " Delete trailing whitespace on save...
 " https://vim.fandom.com/wiki/Remove_unwanted_spaces#Automatically_removing_all_trailing_whitespace
 autocmd BufWritePre * :%s/\s\+$//e
+
+" Markdown mappings
+autocmd Syntax markdown :iabbrev <buffer> -[ -<Space>[<Space>]
