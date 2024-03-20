@@ -187,6 +187,7 @@ function install_casks () {
         keyboard-cleaner \
         kindle \
         licecap \
+        netnewswire \
         ngrok \
         qbserve \
         pycharm \
