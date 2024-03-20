@@ -102,6 +102,10 @@ install_kegs () {
     # Nicer top
     brew install htop-osx
 
+    # java - https://adoptium.net/installation/
+    brew install --cask temurin
+    brew install jenv
+
     # Parse and filter JSON from the command line
     brew install jmespath
     brew install jq
@@ -187,7 +191,8 @@ function install_casks () {
         qbserve \
         pycharm \
         rectangle \
-        spotify
+        spotify \
+        temurin
     success "Casks installed"
 
     colima completion bash > /usr/local/etc/bash_completion.d/colima
@@ -196,6 +201,10 @@ function install_casks () {
 function setup_git () {
    [ -f ~/.giconfig ] && mv ~/.gitconfig ~/.gitconfig.bak
    ln -s "${DIR}/git/gitconfig" ~/.gitconfig
+}
+
+function setup_java () {
+    # https://github.com/jenv/jenv/blob/master/README.md
 }
 
 function setup_python () {
