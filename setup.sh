@@ -79,6 +79,9 @@ install_kegs () {
     # Linux vs BSD
     brew install coreutils
 
+    # https://duckdb.org/
+    brew install duckdb
+
     # ascii art
     brew install figlet
 
