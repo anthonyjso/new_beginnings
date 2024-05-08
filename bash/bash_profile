@@ -11,9 +11,10 @@ eval "$(pyenv init -)"
 eval export PATH="/Users/aso/.jenv/shims:${PATH}"
 export JENV_SHELL=bash
 export JENV_LOADED=1
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
 unset JAVA_HOME
 unset JDK_HOME
-source '/usr/local/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.bash'
+source '/usr/local/Cellar/jenv/0.5.7/libexec/completions/jenv.bash'
 jenv rehash 2>/dev/null
 jenv refresh-plugins
 jenv() {
