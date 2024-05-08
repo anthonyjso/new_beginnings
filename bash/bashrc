@@ -17,8 +17,8 @@ alias allremotes='git branch -r | grep -v "\-\>" | while read remote; do git bra
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 # Ruby
-# export PATH="$HOME/.rbenv/bin:$PATH"
-# eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # virtualenv
 export PYENV_ROOT="$HOME/.pyenv"
