@@ -85,6 +85,9 @@ install_kegs () {
     # ascii art
     brew install figlet
 
+    # Nerdfont for items such as Tmux themes
+    brew install font-fira-code-nerd-font
+
     # FZF, rigrep, and fd for fuzzy finding and searching
     brew install fd
     brew install fzf
@@ -180,6 +183,7 @@ function install_casks () {
     # Manually: little-snitch, alfred, pycharm pro
 
     brew tap caskroom/cask
+    brew tap homebrew/cask-fonts
     brew cask install --appdir="${HOME}/Applications" \
         docker \
         colima \
@@ -501,8 +505,8 @@ if [ "$0" != "$_" ]; then
     # prereqs
     # install_xcode_clt
     # install_homebrew
-    # install_kegs
     # install_casks
+    # install_kegs
     # setup_git
     # setup_python
     # fetch_themes
