@@ -36,3 +36,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 " Markdown mappings
 autocmd Syntax markdown :iabbrev <buffer> -[ -<Space>[<Space>]
+call plug#begin()
+Plug 'mattn/emmet-vim'
+call plug#end()
+
