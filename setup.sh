@@ -4,7 +4,7 @@
 # @anthonyjso
 ################################################################################
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CODE=${HOME}/Code
 
 mkdir -p "${CODE}"
@@ -12,26 +12,26 @@ mkdir -p ~/bin
 
 trap 'echo "Error at $LINENO";' ERR
 
-info () {
-  printf "  [ \033[00;34m..\033[0m ] %s\n" "$1"
+info() {
+    printf "  [ \033[00;34m..\033[0m ] %s\n" "$1"
 }
 
-user () {
-  printf "\r  [ \033[0;33m?\033[0m ] %s\n" "$1"
+user() {
+    printf "\r  [ \033[0;33m?\033[0m ] %s\n" "$1"
 }
 
-success () {
-  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] %s\n" "$1"
+success() {
+    printf "\r\033[2K  [ \033[00;32mOK\033[0m ] %s\n" "$1"
 }
 
-fail () {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] %s\n" "$1"
-  echo ''
-  exit 1
+fail() {
+    printf "\r\033[2K  [\033[0;31mFAIL\033[0m] %s\n" "$1"
+    echo ''
+    exit 1
 }
 
 # SSH keys required to access Git repos, etc
-prereqs () {
+prereqs() {
 
     [ "$(find ~/.ssh | wc -l)" -gt 0 ] || fail "SSH keys required."
     ssh-add -L | grep id_rsa
@@ -42,22 +42,21 @@ prereqs () {
 # Install xcode command line tools.
 # https://github.com/chcokr/osx-init/blob/master/install.sh
 # https://github.com/timsutton/osx-vm-templates/blob/ce8df8a7468faa7c5312444ece1b977c1b2f77a4/scripts/xcode-cli-tools.sh
-install_xcode_clt () {
+install_xcode_clt() {
     if [ ! "$(which gcc)" ]; then
-        touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
+        touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
         PROD=$(softwareupdate -l |
-        grep "\*.*Command Line" |
+            grep "\*.*Command Line" |
             head -n 1 | awk -F"*" '{print $2}' |
             sed -e 's/^ *//' | tr -d '\n')
-        softwareupdate -i "$PROD" -v;
+        softwareupdate -i "$PROD" -v
     fi
 
     success "XCode Command Line Tools Installed"
 }
 
-
 # Install Homebrew package manager.
-install_homebrew () {
+install_homebrew() {
     if [ ! "$(which brew)" ]; then
         # This can be automated to just untar the tarball and symlink the bin
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -70,7 +69,7 @@ install_homebrew () {
     success "Homebrew installed"
 }
 
-install_kegs () {
+install_kegs() {
     info "Installing Homebrew kegs"
 
     # bash completion
@@ -140,6 +139,7 @@ install_kegs () {
 
     # A shell script static analysis tool
     brew install shellcheck
+    brew install shfmt
 
     # Customizable prompt for any shell
     brew install starship
@@ -180,7 +180,7 @@ install_kegs () {
     success "Homebrew kegs installed"
 }
 
-function install_casks () {
+function install_casks() {
 
     # From app store
     # evernote, clamxav, google-chrome, 1Password
@@ -207,36 +207,35 @@ function install_casks () {
         temurin
     success "Casks installed"
 
-    colima completion bash > /usr/local/etc/bash_completion.d/colima
+    colima completion bash >/usr/local/etc/bash_completion.d/colima
 }
 
-function setup_git () {
-   [ -f ~/.giconfig ] && mv ~/.gitconfig ~/.gitconfig.bak
-   ln -s "${DIR}/git/gitconfig" ~/.gitconfig
+function setup_git() {
+    [ -f ~/.giconfig ] && mv ~/.gitconfig ~/.gitconfig.bak
+    ln -s "${DIR}/git/gitconfig" ~/.gitconfig
 }
 
-function setup_java () {
+function setup_java() {
     # https://github.com/jenv/jenv/blob/master/README.md
 }
 
-function setup_python () {
-    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-    echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
-    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
-    echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
-    echo 'alias jb='\''open -na "PyCharm.app" --args "$@"'\''' >> ~/.bash_profile
+function setup_python() {
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >>~/.bashrc
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >>~/.bashrc
+    echo 'eval "$(pyenv init -)"' >>~/.bashrc
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >>~/.bash_profile
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >>~/.bash_profile
+    echo 'eval "$(pyenv init -)"' >>~/.bash_profile
+    echo 'alias jb='\''open -na "PyCharm.app" --args "$@"'\''' >>~/.bash_profile
 
     success "Setup Python virtual environments"
 }
 
-
-function setup_rust () {
+function setup_rust() {
     cargo install rusty-tags
 }
 
-function fetch_themes () {
+function fetch_themes() {
 
     for repo in git@github.com:neil477/base16-emacs.git \
         https://github.com/adilosa/base16-idea.git \
@@ -245,14 +244,14 @@ function fetch_themes () {
         https://github.com/chriskempson/vim-tomorrow-theme.git \
         https://github.com/chriskempson/base16-vim.git; do
 
-    	# shellcheck disable=SC2001
+        # shellcheck disable=SC2001
         repo_dir=$(echo "${repo}" | sed 's#.*/\(.*\).git$#\1#g')
-        [ -d "${CODE}/${repo_dir}" ] || git -C "$CODE" clone "$repo";
+        [ -d "${CODE}/${repo_dir}" ] || git -C "$CODE" clone "$repo"
     done
     success "Third party repos installed"
 }
 
-function setup_osx () {
+function setup_osx() {
 
     info "Configuring OSX"
 
@@ -302,7 +301,6 @@ function setup_osx () {
     defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
     defaults write NSGlobalDomain com.apple.mouse.scaling -float 2.5
 
-
     defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode -string "TwoButton"
     defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseTwoFingerHorizSwipeGesture -int 2
 
@@ -328,7 +326,7 @@ function setup_osx () {
     defaults write -g com.apple.keyboard.fnState -boolean true
 
     # Turn off autocorrect
-    defaults write NSGlobalDomain  NSAutomaticSpellingCorrectionEnabled 0
+    defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled 0
 
     # Screen
 
@@ -445,17 +443,17 @@ function setup_osx () {
     success "Finished configuring OSX"
 }
 
-function install_dotfiles () {
+function install_dotfiles() {
     [ -h "${HOME}/.bash_profile" ] || ln -s "${DIR}/bash/bashrc" "${HOME}/.bash_profile"
     success "Installed dotfiles"
 }
 
-function install_work () {
+function install_work() {
     # idea being to have work specific script sourced and executed here
     info 'install work'
 }
 
-function setup_tmux () {
+function setup_tmux() {
     # Terminal multiplexer
     brew install tmux
 
@@ -463,26 +461,27 @@ function setup_tmux () {
 
     # Plugin Manager
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    echo "set -g @plugin 'tmux-plugins/tpm'" >> "${HOME}"/.tmux.conf
-    echo "set -g @plugin 'tmux-plugins/tmux-sensible'" >> "${HOME}"/.tmux.conf
-    echo "set -g @plugin 'tmux-plugins/tmux-resurrect'" >> "${HOME}"/.tmux.conf
-    echo "set -g @resurrect-strategy-nvim 'session'" >> "${HOME}"/.tmux.conf
-    echo "run '~/.tmux/plugins/tpm/tpm'" >> "${HOME}"/.tmux.conf # must be at bottom
+    echo "set -g @plugin 'tmux-plugins/tpm'" >>"${HOME}"/.tmux.conf
+    echo "set -g @plugin 'tmux-plugins/tmux-sensible'" >>"${HOME}"/.tmux.conf
+    echo "set -g @plugin 'tmux-plugins/tmux-resurrect'" >>"${HOME}"/.tmux.conf
+    echo "set -g @resurrect-strategy-nvim 'session'" >>"${HOME}"/.tmux.conf
+    echo "run '~/.tmux/plugins/tpm/tpm'" >>"${HOME}"/.tmux.conf # must be at bottom
 }
 
 # install plugins with lazy.nvim
-function setup_nvim () {
+function setup_nvim() {
     [ -d ~/.config/nvim/ ] || mkdir -p "$HOME"/.config/nvim
     [ -h ~/.config/nvim/init.lua ] || ln -s "${DIR}"/nvim/init.vim "$HOME"/.config/nvim/init.lua
+    # npm install -g neovim...figure out how to have a dependnecy on npm/nvm/node
 }
 
-install_fonts () {
+install_fonts() {
     font_dir=~/Library/Fonts
     curl -o /tmp/FiraCode_1.206.zip https://github.com/tonsky/FiraCode/releases/download/1.206/FiraCode_1.206.zip
     unzip /tmp/FiraCode_1.206.zip -d "$font_dir"
 }
 
-install_hours () {
+install_hours() {
     [ -d ~/bin ] || mkdir ~/bin
     [ -L ~/bin/hours ] || ln -s "${DIR}/hours" ~/bin/hours
 }
