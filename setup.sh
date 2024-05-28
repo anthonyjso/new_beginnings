@@ -116,6 +116,10 @@ install_kegs () {
     brew install jmespath
     brew install jq
 
+    # Neovim and LSPs
+    brew install neovim
+    brew install lua-language-server
+
     # For Node/TS development
     brew install nvm
     brew install npm
@@ -466,27 +470,10 @@ function setup_tmux () {
     echo "run '~/.tmux/plugins/tpm/tpm'" >> "${HOME}"/.tmux.conf # must be at bottom
 }
 
+# install plugins with lazy.nvim
 function setup_nvim () {
-    [ -f /usr/local/bin/nvim ] || brew install neovim
     [ -d ~/.config/nvim/ ] || mkdir -p "$HOME"/.config/nvim
-    [ -h ~/.config/nvim/init.vim ] || ln -s "${DIR}"/nvim/init.vim "$HOME"/.config/nvim/init.vim
-
-    repos=(
-        git@github.com:junegunn/fzf.vim.git
-        git@github.com:junegunn/goyo.vim.git
-        git@github.com:junegunn/limelight.vim.git
-        git@github.com:neoclide/coc.nvim.git
-        git@github.com:christoomey/vim-tmux-navigator.git
-        git@github.com:tpope/vim-surround.git
-    )
-
-    for repo in ${repos[*]}; do
-        to_dir=$(basename "$repo" | sed "s#\.git##g")
-        to_path="$HOME/.config/nvim/pack/packages/start/${to_dir}"
-        if [ ! -d "$to_path" ] ; then
-            git clone "$repo" "${to_path}"
-        fi
-    done
+    [ -h ~/.config/nvim/init.lua ] || ln -s "${DIR}"/nvim/init.vim "$HOME"/.config/nvim/init.lua
 }
 
 install_fonts () {
