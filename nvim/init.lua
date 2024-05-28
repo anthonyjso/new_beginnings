@@ -15,6 +15,7 @@ vim.opt.relativenumber = true
 -- KEYMAPS
 vim.g.mapleader = " "
 
+
 -- PLUGINS
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -30,7 +31,35 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-    {"neovim/nvim-lspconfig"},
+    {
+        "neovim/nvim-lspconfig",
+        highlight = { enable = true },
+        indent = { enable = true },
+        ensure_installed = {
+            "bash",
+            "diff",
+            "html",
+            "javascript",
+            "jsdoc",
+            "json",
+            "jsonc",
+            "lua",
+            "luadoc",
+            "luap",
+            "markdown",
+            "markdown_inline",
+            "python",
+            "query",
+            "regex",
+            "toml",
+            "tsx",
+            "typescript",
+            "vim",
+            "vimdoc",
+            "xml",
+            "yaml",
+        },
+    },
     {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
     {"nvim-telescope/telescope.nvim", tag = "0.1.6", dependencies = {"nvim-lua/plenary.nvim" }},
     {"junegunn/goyo.vim"},
