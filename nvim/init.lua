@@ -1,13 +1,10 @@
 -- OPTIONS
--- tabs
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
-
-
--- line numbers
+vim.opt.wrap = false
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -67,13 +64,13 @@ local plugins = {
     {"Exafunction/codeium.vim"},
     {"rose-pine/neovim", name = "rose-pine"},
 }
-local opts = {}
 
-require("lazy").setup(plugins, opts)
+require("lazy").setup(plugins, {})
 
 -- LSPs
 local lspconfig = require('lspconfig')
 
+-- Depends on shellcheck and shellfmt
 lspconfig.bashls.setup{}
 
 -- brew install lua-language-server
@@ -111,7 +108,6 @@ lspconfig.html.setup{}
 lspconfig.jsonls.setup{}
 lspconfig.pyright.setup{}
 lspconfig.ruff.setup{}
-
 lspconfig.tsserver.setup{
   init_options = {
     plugins = {},
@@ -122,9 +118,28 @@ lspconfig.tsserver.setup{
   },
 }
 
-
--- COLORSCHEME
-vim.cmd("colorscheme rose-pine-moon")
+-- Configure keymaps and autocommands to use LSP features.
+-- https://neovim.io/doc/user/lsp.html#lsp-quickstart
+local AsoGroup = vim.api.nvim_create_augroup("AsoGroup", {})
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = AsoGroup,
+    callback = function(e)
+        local lsp_opts = { buffer = e.buf }
+        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, lsp_opts)
+        vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, lsp_opts)
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, lsp_opts)
+        vim.keymap.set("n", "gK", function() vim.lsp.buf.signature_help() end, lsp_opts)
+        vim.keymap.set("i", "<c-k>", function() vim.lsp.buf.signature_help() end, lsp_opts)
+        vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, lsp_opts)
+        vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, lsp_opts)
+        vim.keymap.set("n", "<leader>l", function() vim.lsp.buf.format({ async = true }) end, lsp_opts)
+        vim.keymap.set("n", "<leader>cR", function() vim.lsp.buf.rename() end, lsp_opts)
+        vim.keymap.set("n", "]]", function() vim.diagnostic.goto_next() end, lsp_opts)
+        vim.keymap.set("n", "[[", function() vim.diagnostic.goto_prev() end, lsp_opts)
+        vim.keymap.set("n", "<a-n>", function() vim.diagnostic.goto_next() end, lsp_opts)
+        vim.keymap.set("n", "<a-p>", function() vim.diagnostic.goto_prev() end, lsp_opts)
+    end
+})
 
 -- telescope.nvim
 local builtin = require('telescope.builtin')
@@ -133,6 +148,8 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fp', builtin.git_files, {})
 vim.keymap.set('n', '<leader>c', builtin.commands, {})
+vim.keymap.set('n', '<M-space>', builtin.lsp_definitions, {})
+
 
 -- trim trailing whitespace on save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -151,15 +168,11 @@ function OpenInitLua()
 end
 vim.api.nvim_create_user_command('Config', OpenInitLua, {desc="Search available commands"})
 
--- Function to format the current buffer
-function FormatCurrentBuffer()
-  vim.lsp.buf.format({ async = true })
-end
 
--- Map COMMAND+ALT+l to format the current buffer
-vim.api.nvim_set_keymap(
-  'n',
-  '<leader>l',
-  ':lua FormatCurrentBuffer()<CR>',
-  { noremap = true, silent = true }
-)
+-- Codeium https://github.com/Exafunction/codeium.vim
+-- Enable with CodeiumEnable if needed
+vim.g.codeium_enabled = false
+
+-- COLORSCHEME
+vim.cmd("colorscheme rose-pine-moon")
+
