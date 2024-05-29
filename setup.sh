@@ -118,6 +118,10 @@ install_kegs() {
     # Neovim and LSPs
     brew install neovim
     brew install lua-language-server
+    brew install pyright # python type checker
+    brew install ruff # python linter
+    brew install typescript-language-server
+    brew install vscode-langservers-extracted
 
     # For Node/TS development
     brew install nvm

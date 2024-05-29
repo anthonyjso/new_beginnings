@@ -103,6 +103,13 @@ lspconfig.lua_ls.setup {
     },
 }
 
+--vscode-langservers-extracted
+lspconfig.cssls.setup{}
+lspconfig.html.setup{}
+lspconfig.jsonls.setup{}
+lspconfig.pyright.setup{}
+lspconfig.ruff.setup{}
+
 lspconfig.tsserver.setup{
   init_options = {
     plugins = {},
