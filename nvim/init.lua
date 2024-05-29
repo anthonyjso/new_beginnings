@@ -63,6 +63,8 @@ local plugins = {
     {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
     {"nvim-telescope/telescope.nvim", tag = "0.1.6", dependencies = {"nvim-lua/plenary.nvim" }},
     {"junegunn/goyo.vim"},
+    {"tpope/vim-fugitive"},
+    {"Exafunction/codeium.vim"},
     {"rose-pine/neovim", name = "rose-pine"},
 }
 local opts = {}
