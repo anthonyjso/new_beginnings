@@ -476,7 +476,8 @@ function setup_tmux() {
 function setup_nvim() {
     [ -d ~/.config/nvim/ ] || mkdir -p "$HOME"/.config/nvim
     [ -h ~/.config/nvim/init.lua ] || ln -s "${DIR}"/nvim/init.vim "$HOME"/.config/nvim/init.lua
-    # npm install -g neovim...figure out how to have a dependnecy on npm/nvm/node
+    npm install -g neovim
+    cargo install harper-ls --locked
 }
 
 install_fonts() {
@@ -504,7 +505,7 @@ if [ "$0" != "$_" ]; then
     # install_work
     # setup_osx
     # install_fonts
-    # setup_nvim
+    # setup_nvim # depends on nvm/npm, rustup/cargo
     # setup_tmux
     # install_hours
 fi
