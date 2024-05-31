@@ -91,6 +91,7 @@ install_kegs() {
     brew install fd
     brew install fzf
     brew install ripgrep
+    brew install rga
 
     # Git
     brew install git
