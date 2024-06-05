@@ -120,7 +120,7 @@ install_kegs() {
     brew install neovim
     brew install lua-language-server
     brew install pyright # python type checker
-    brew install ruff # python linter
+    brew install ruff    # python linter
     brew install typescript-language-server
     brew install vscode-langservers-extracted
 
@@ -222,6 +222,7 @@ function setup_git() {
 
 function setup_java() {
     # https://github.com/jenv/jenv/blob/master/README.md
+    echo "no java setup"
 }
 
 function setup_python() {
@@ -242,13 +243,7 @@ function setup_rust() {
 
 function fetch_themes() {
 
-    for repo in git@github.com:neil477/base16-emacs.git \
-        https://github.com/adilosa/base16-idea.git \
-        https://github.com/chriskempson/base16-iterm2.git \
-        https://github.com/chriskempson/base16-shell.git \
-        https://github.com/chriskempson/vim-tomorrow-theme.git \
-        https://github.com/chriskempson/base16-vim.git; do
-
+    for repo in "git@github.com:rose-pine/iterm.git"; do
         # shellcheck disable=SC2001
         repo_dir=$(echo "${repo}" | sed 's#.*/\(.*\).git$#\1#g')
         [ -d "${CODE}/${repo_dir}" ] || git -C "$CODE" clone "$repo"
