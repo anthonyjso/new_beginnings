@@ -43,9 +43,11 @@ local plugins = {
     "rose-pine/neovim",
     name = "rose-pine",
     lazy = false,
-    priority = 50,
+    priority = 51,
   },
-  "folke/which-key.nvim",
+  {
+    "folke/which-key.nvim"
+  },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -77,27 +79,30 @@ local plugins = {
       },
     },
   },
-  "nvim-treesitter/nvim-treesitter-textobjects",
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects"
+  },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- Library items can be absolute paths
+        -- "~/projects/my-awesome-lib",
+        -- Or relative, which means they will be resolved as a plugin
+        -- "LazyVim",
+        -- When relative, you can also provide a path to the library in the plugin dir
+        "luvit-meta/library", -- see below
+      },
+    },
+  },
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lsp-signature-help",
-      {
-        "folke/lazydev.nvim",
-        ft = "lua", -- only load on lua files
-        opts = {
-          library = {
-            -- Library items can be absolute paths
-            -- "~/projects/my-awesome-lib",
-            -- Or relative, which means they will be resolved as a plugin
-            -- "LazyVim",
-            -- When relative, you can also provide a path to the library in the plugin dir
-            "luvit-meta/library", -- see below
-          },
-        },
-      },
+      "folke/lazydev.nvim",
     },
     config = function ()
       local lspconfig = require("lspconfig")
