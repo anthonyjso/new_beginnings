@@ -66,6 +66,12 @@ local plugins = {
     "folke/which-key.nvim"
   },
   {
+    "lewis6991/gitsigns.nvim",
+    config = function ()
+      require("gitsigns").setup()
+    end
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       highlight = { enable = true },

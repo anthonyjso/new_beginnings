@@ -95,6 +95,7 @@ install_kegs() {
 
     # Git
     brew install git
+    brew install gitui
 
     # gnu sed
     brew install gnu-sed --with-default-names
