@@ -430,18 +430,6 @@ function setup_osx() {
     defaults write com.apple.dock wvous-bl-corner -int 5
     defaults write com.apple.dock wvous-bl-modifier -int 0
 
-    # Termina/iterm2
-
-    # Install the Solarized Dark theme for iTerm
-    # TODO: install themes...
-    # open "${HOME}/init/Solarized Dark.itermcolors"
-
-    # Don’t display the annoying prompt when quitting iTerm
-    defaults write com.googlecode.iterm2 PromptOnQuit -bool false
-
-    # potentially kill processes to allow settings to take effect
-    # like dock and finder...
-
     success "Finished configuring OSX"
 }
 
@@ -484,6 +472,13 @@ install_fonts() {
     unzip /tmp/FiraCode_1.206.zip -d "$font_dir"
 }
 
+setup_iterm2() {
+    if [ -f ~/.config/iterm2/Default.json ]; then
+        mkdir -p ~/.config/iterm2/
+        ln -s "${DIR}/iterm2/Default.json" ~/.config/iterm2/Default.json
+    fi
+}
+
 install_hours() {
     [ -d ~/bin ] || mkdir ~/bin
     [ -L ~/bin/hours ] || ln -s "${DIR}/hours" ~/bin/hours
@@ -504,6 +499,7 @@ if [ "$0" != "$_" ]; then
     # setup_osx
     # install_fonts
     # setup_nvim # depends on nvm/npm, rustup/cargo
+    # setup_iterm2
     # setup_tmux
     # install_hours
 fi
