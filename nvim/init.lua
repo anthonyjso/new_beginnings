@@ -367,8 +367,10 @@ local plugins = {
         end)
     end
   },
+  { "Exafunction/codeium.vim" },
 }
 
 local lazy = require("lazy")
 lazy.setup(plugins, { colorscheme = { "rose-pine-moon" } })
 vim.cmd("colorscheme rose-pine-moon")
+vim.g.codeium_enabled = false
