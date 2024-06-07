@@ -125,6 +125,7 @@ install_kegs() {
     brew install ruff    # python linter
     brew install typescript-language-server
     brew install vscode-langservers-extracted
+    brew install yaml-language-server
 
     # For Node/TS development
     brew install nvm

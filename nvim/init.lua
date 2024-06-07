@@ -135,7 +135,7 @@ local plugins = {
       local capabilities = cmp_nvim_lsp.default_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
       -- bashls depends on shellcheck and shellfmt
-      local servers = { "bashls", "cssls", "html", "jsonls", "marksman", "pyright", "ruff" }
+      local servers = { "bashls", "cssls", "html", "jsonls", "marksman", "pyright", "ruff", "yamlls" }
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup { capabilities = capabilities }
       end
