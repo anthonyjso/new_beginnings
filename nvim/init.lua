@@ -21,6 +21,7 @@ local function OpenInitLua()
   local config_path = vim.fn.stdpath("config") .. "/init.lua"
   vim.cmd("edit " .. config_path)
 end
+
 vim.api.nvim_create_user_command("Config", OpenInitLua, { desc = "Search available commands" })
 vim.keymap.set("n", "<M-,>", "<cmd>Config<cr>")
 
@@ -38,12 +39,18 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
+
+
 local plugins = {
+
   {
     "rose-pine/neovim",
     name = "rose-pine",
     lazy = false,
-    priority = 51,
+    priority = 99,
+    config = function ()
+      vim.cmd("colorscheme rose-pine-moon")
+    end
   },
   {
     "christoomey/vim-tmux-navigator",
@@ -370,7 +377,22 @@ local plugins = {
   { "Exafunction/codeium.vim" },
 }
 
+local opts = { colorscheme = { "rose-pine-moon" } }
+
 local lazy = require("lazy")
-lazy.setup(plugins, { colorscheme = { "rose-pine-moon" } })
-vim.cmd("colorscheme rose-pine-moon")
+-- Attempt to load private configuration ./config/nvim/lua/private.lua
+local ok, _ = pcall(require, "private")
+if not ok then
+  vim.schedule(
+    function ()
+      vim.api.nvim_command('echom "Warning: No private.lua found"')
+      lazy.setup(plugins, opts)
+    end)
+else
+  lazy.setup({ plugins, { require("private") } }, opts)
+end
+
+
+
+
 vim.g.codeium_enabled = false
