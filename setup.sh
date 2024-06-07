@@ -221,6 +221,7 @@ function install_casks() {
 function setup_git() {
     [ -f ~/.giconfig ] && mv ~/.gitconfig ~/.gitconfig.bak
     ln -s "${DIR}/git/gitconfig" ~/.gitconfig
+    ln -s "${DIR}/git/gitignore_global" ~/gitignore_global
 }
 
 function setup_java() {
@@ -462,9 +463,10 @@ function setup_tmux() {
 # install plugins with lazy.nvim
 function setup_nvim() {
     [ -d ~/.config/nvim/ ] || mkdir -p "$HOME"/.config/nvim
+    [ -d ~/.config/nvim/lua ] || mkdir -p "$HOME"/.config/nvim/lua
+    [ -f ~/.config/nvim/lua/private.lua ] || touch "$HOME"/.config/nvim/lua/private.lua
     [ -h ~/.config/nvim/init.lua ] || ln -s "${DIR}"/nvim/init.vim "$HOME"/.config/nvim/init.lua
     npm install -g neovim
-    cargo install harper-ls --locked
 }
 
 install_fonts() {
