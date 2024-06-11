@@ -9,6 +9,8 @@ vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 999
 vim.opt.signcolumn = "yes"
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
 
 -- KEYMAPS
 -- Map leader to space
