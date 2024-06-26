@@ -18,6 +18,8 @@ vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.keymap.set("n", "<BS>", "<Esc>ciw<Esc>", { noremap = true })
+
 --- Function to open init.lua
 local function OpenInitLua()
   local config_path = vim.fn.stdpath("config") .. "/init.lua"
