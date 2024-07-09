@@ -3,6 +3,7 @@ export VISUAL=nvim
 export EDITOR=$VISUAL
 
 # Set unlimited history
+HISTCONTROL=ignorespace
 HISTSIZE=
 HISTFILESIZE=
 
