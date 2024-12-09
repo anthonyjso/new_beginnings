@@ -113,6 +113,9 @@ install_kegs() {
     brew install --cask temurin
     brew install jenv
 
+    # https://just.systems/ (make alternative)
+    brew install just
+
     # Parse and filter JSON from the command line
     brew install jmespath
     brew install jq
